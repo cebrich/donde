@@ -5,18 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscador de Puntos de Venta - Loterías</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f4f4f9; color: #333; }
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; color: #333; }
         .container { max-width: 650px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         h2 { color: #003366; text-align: center; }
         label { display: block; margin-top: 15px; font-weight: bold; }
         select, input, textarea, button { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 15px; }
-        textarea { height: 80px; resize: vertical; font-family: monospace; font-size: 12px; }
+        textarea { height: 70px; resize: vertical; font-family: monospace; font-size: 12px; }
         button { background-color: #003366; color: white; font-weight: bold; margin-top: 15px; cursor: pointer; border: none; }
         button:hover { background-color: #002244; }
         .btn-secundario { background-color: #555; }
         .btn-secundario:hover { background-color: #333; }
+        .config-box { background: #eef2f7; padding: 12px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #d0d7de; }
+        .config-box input { margin-top: 5px; background: white; }
         #log { margin-top: 20px; font-size: 14px; color: #555; white-space: pre-wrap; background: #eee; padding: 10px; border-radius: 4px; }
-        hr { margin: 25px 0; border: 0; border-top: 1px solid #ddd; }
+        hr { margin: 20px 0; border: 0; border-top: 1px solid #ddd; }
     </style>
 </head>
 <body>
@@ -24,16 +26,22 @@
 <div class="container">
     <h2>Buscador y Descarga de Puntos de Venta</h2>
     
-    <!-- SECCIÓN PARA PEGAR EL CÓDIGO/JSON DE SORTEOS -->
-    <label for="jsonInput">Pega aquí el texto/JSON de sorteos de la web original:</label>
-    <textarea id="jsonInput" placeholder="Pega aquí la línea o estructura JSON con los sorteos..."></textarea>
+    <!-- CONFIGURACIÓN PRIVADA DE SCRAPERAPI (No se sube expuesta a GitHub) -->
+    <div class="config-box">
+        <label for="apiKeyInput" style="font-size: 13px; margin-top:0;">🔑 Tu API Key de ScraperAPI (Privada):</label>
+        <input type="password" id="apiKeyInput" placeholder="Pega aquí tu clave (se guarda solo en tu navegador)" onchange="guardarApiKey()">
+    </div>
+
+    <!-- SECCIÓN PARA PEGAR EL CÓDIGO HTML DE LOS SORTEOS -->
+    <label for="jsonInput">Pega aquí el código HTML del select (&lt;select&gt;...&lt;/select&gt;) de la web original:</label>
+    <textarea id="jsonInput" placeholder="Pega aquí el bloque HTML con los sorteos..."></textarea>
     <button class="btn-secundario" onclick="cargarSorteosDesdeTexto()">Cargar Sorteos en el Selector</button>
 
     <hr>
 
     <label for="sorteoSelect">Selecciona el Sorteo:</label>
     <select id="sorteoSelect">
-        <option value="">-- Primero pega los datos arriba y pulsa cargar --</option>
+        <option value="NONE">-- Primero carga los sorteos arriba --</option>
     </select>
 
     <label for="numeroInput">Número de Décimo (5 cifras):</label>
@@ -41,7 +49,7 @@
 
     <button onclick="descargarTxtPuntosDeVenta()">Generar y Descargar .txt</button>
 
-    <div id="log">Estado: Esperando datos de sorteos...</div>
+    <div id="log">Estado: Listo para configurar y buscar.</div>
 </div>
 
 <script src="app.js"></script>

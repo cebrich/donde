@@ -1,3 +1,19 @@
+// Al cargar la página, recuperamos la API Key guardada de forma privada en el navegador si existe
+document.addEventListener('DOMContentLoaded', () => {
+    const savedKey = localStorage.getItem('scraper_api_key');
+    if (savedKey) {
+        document.getElementById('apiKeyInput').value = savedKey;
+    }
+});
+
+function guardarApiKey() {
+    const key = document.getElementById('apiKeyInput').value.trim();
+    if (key) {
+        localStorage.setItem('scraper_api_key', key);
+        document.getElementById('log').innerText = "API Key guardada de forma segura en tu navegador.";
+    }
+}
+
 function cargarSorteosDesdeTexto() {
     const htmlCrudo = document.getElementById('jsonInput').value.trim();
     const selectSorteo = document.getElementById('sorteoSelect');
@@ -9,21 +25,17 @@ function cargarSorteosDesdeTexto() {
     }
 
     try {
-        // Creamos un elemento temporal en memoria para leer el HTML pegado
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlCrudo, 'text/html');
-        
-        // Buscamos todas las etiquetas <option> dentro del texto pegado
         const options = doc.querySelectorAll('option');
 
-        selectSorteo.innerHTML = ""; // Limpiar el selector actual
+        selectSorteo.innerHTML = ""; 
         let contador = 0;
 
         options.forEach(opt => {
             const val = opt.getAttribute('value');
             const texto = opt.textContent.trim();
 
-            // Ignoramos la opción por defecto que indica "Selecciona..."
             if (val && val !== "NONE") {
                 let option = document.createElement('option');
                 option.value = val;
@@ -34,22 +46,28 @@ function cargarSorteosDesdeTexto() {
         });
 
         if (contador > 0) {
-            logDiv.innerText = `¡Sorteos cargados con éxito! Se han detectado ${contador} sorteos listos para buscar.`;
+            logDiv.innerText = `¡Sorteos cargados con éxito! (${contador} sorteos disponibles).`;
         } else {
-            selectSorteo.innerHTML = '<option value="">No se encontraron sorteos válidos</option>';
+            selectSorteo.innerHTML = '<option value="NONE">No se encontraron sorteos válidos</option>';
             logDiv.innerText = "El HTML pegado no contiene opciones de sorteo válidas.";
         }
 
     } catch (error) {
         console.error(error);
-        logDiv.innerText = "Error al procesar el código HTML. Asegúrate de haber copiado el bloque <select>...</select> completo.";
+        logDiv.innerText = "Error al procesar el código HTML.";
     }
 }
 
 async function descargarTxtPuntosDeVenta() {
+    const apiKey = document.getElementById('apiKeyInput').value.trim();
     const idSorteo = document.getElementById('sorteoSelect').value;
     const numero = document.getElementById('numeroInput').value.trim();
     const logDiv = document.getElementById('log');
+
+    if (!apiKey) {
+        alert("Por favor, introduce tu API Key de ScraperAPI en la caja superior.");
+        return;
+    }
 
     if (!idSorteo || idSorteo === "NONE") {
         alert("Por favor, selecciona un sorteo válido del desplegable.");
@@ -61,13 +79,19 @@ async function descargarTxtPuntosDeVenta() {
         return;
     }
 
-    logDiv.innerText = "Consultando puntos de venta para el décimo...";
+    logDiv.innerText = "Consultando puntos de venta a través de ScraperAPI (saltando geolocalización)...";
 
     try {
-        const urlApi = `https://www.loteriasyapuestas.es/servicios/buscadordecimos?numero=${numero}&sorteo=${idSorteo}`;
-        const proxyApiUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(urlApi);
+        const targetUrl = `https://www.loteriasyapuestas.es/servicios/buscadordecimos?numero=${numero}&sorteo=${idSorteo}`;
+        // Petición a ScraperAPI forzando IP de España (country_code=es)
+        const scraperUrl = `https://api.scraperapi.com?api_key=${apiKey}&country_code=es&url=${encodeURIComponent(targetUrl)}`;
 
-        const response = await fetch(proxyApiUrl);
+        const response = await fetch(scraperUrl);
+        
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
         const data = await response.json();
 
         let contenidoTxt = `LISTADO DE PUNTOS DE VENTA\n`;
@@ -92,7 +116,7 @@ async function descargarTxtPuntosDeVenta() {
 
     } catch (error) {
         console.error(error);
-        logDiv.innerText = "Error al obtener los datos de la administración.";
+        logDiv.innerText = "Error al obtener los datos. Comprueba que tu API Key de ScraperAPI sea correcta y tenga créditos disponibles.";
     }
 }
 
