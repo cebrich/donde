@@ -1,46 +1,48 @@
 function cargarSorteosDesdeTexto() {
-    const textoCrudo = document.getElementById('jsonInput').value.trim();
+    const htmlCrudo = document.getElementById('jsonInput').value.trim();
     const selectSorteo = document.getElementById('sorteoSelect');
     const logDiv = document.getElementById('log');
 
-    if (!textoCrudo) {
-        alert("Por favor, pega el texto de los sorteos en el cuadro superior.");
+    if (!htmlCrudo) {
+        alert("Por favor, pega el código HTML del select en el cuadro superior.");
         return;
     }
 
     try {
-        // Intentamos parsear el texto pegado como JSON
-        // (Si pegas directamente el array o un objeto que contenga los sorteos)
-        let drawsData = JSON.parse(textoCrudo);
+        // Creamos un elemento temporal en memoria para leer el HTML pegado
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlCrudo, 'text/html');
+        
+        // Buscamos todas las etiquetas <option> dentro del texto pegado
+        const options = doc.querySelectorAll('option');
 
-        // Si el JSON viene envuelto en un objeto, intentamos adaptarlo
-        if (!Array.isArray(drawsData)) {
-            // Buscamos la primera propiedad que sea un array dentro del objeto
-            drawsData = Object.values(drawsData).find(val => Array.isArray(val)) || [];
-        }
+        selectSorteo.innerHTML = ""; // Limpiar el selector actual
+        let contador = 0;
 
-        selectSorteo.innerHTML = ""; 
+        options.forEach(opt => {
+            const val = opt.getAttribute('value');
+            const texto = opt.textContent.trim();
 
-        if (drawsData && drawsData.length > 0) {
-            drawsData.forEach(sorteo => {
+            // Ignoramos la opción por defecto que indica "Selecciona..."
+            if (val && val !== "NONE") {
                 let option = document.createElement('option');
-                // Soportamos varias nomenclaturas comunes en las APIs de Loterías
-                option.value = sorteo.id_sorteo || sorteo.id || sorteo.drawId; 
-                let fecha = sorteo.fecha || sorteo.date || 'Sin fecha';
-                let nombre = sorteo.nombre || sorteo.game_id || sorteo.name || 'Sorteo';
-                
-                option.text = `${fecha} - ${nombre}`;
+                option.value = val;
+                option.text = texto;
                 selectSorteo.appendChild(option);
-            });
-            logDiv.innerText = `¡Sorteos cargados con éxito! Se han detectado ${drawsData.length} sorteos.`;
+                contador++;
+            }
+        });
+
+        if (contador > 0) {
+            logDiv.innerText = `¡Sorteos cargados con éxito! Se han detectado ${contador} sorteos listos para buscar.`;
         } else {
-            selectSorteo.innerHTML = '<option value="">No se encontraron sorteos válidos en el texto</option>';
-            logDiv.innerText = "El formato no contiene una lista de sorteos reconocible.";
+            selectSorteo.innerHTML = '<option value="">No se encontraron sorteos válidos</option>';
+            logDiv.innerText = "El HTML pegado no contiene opciones de sorteo válidas.";
         }
 
     } catch (error) {
         console.error(error);
-        logDiv.innerText = "Error: El texto pegado no tiene un formato JSON válido. Asegúrate de copiar el contenido correcto.";
+        logDiv.innerText = "Error al procesar el código HTML. Asegúrate de haber copiado el bloque <select>...</select> completo.";
     }
 }
 
@@ -49,7 +51,7 @@ async function descargarTxtPuntosDeVenta() {
     const numero = document.getElementById('numeroInput').value.trim();
     const logDiv = document.getElementById('log');
 
-    if (!idSorteo) {
+    if (!idSorteo || idSorteo === "NONE") {
         alert("Por favor, selecciona un sorteo válido del desplegable.");
         return;
     }
