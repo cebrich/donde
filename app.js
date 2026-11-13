@@ -1,5 +1,6 @@
+// Al cargar la página, configuramos eventos y recuperamos la API Key guardada
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Recuperar API Key guardada
+    // 1. Recuperar API Key guardada de forma privada
     const savedKey = localStorage.getItem('scraper_api_key');
     if (savedKey) {
         const apiKeyInput = document.getElementById('apiKeyInput');
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 2. Vincular botones de forma segura por código (evita fallos de caché o inline)
+    // 2. Vincular los botones de forma segura
     const btnCargar = document.getElementById('btnCargar');
     if (btnCargar) {
         btnCargar.addEventListener('click', cargarSorteosDesdeTexto);
@@ -56,6 +57,7 @@ function cargarSorteosDesdeTexto() {
 
         options.forEach(opt => {
             const val = opt.getAttribute('value');
+            // Decodificamos entidades HTML (ej. &Iacute;)
             const txtArea = document.createElement('textarea');
             txtArea.innerHTML = opt.textContent;
             const texto = txtArea.value.trim();
@@ -84,14 +86,14 @@ function cargarSorteosDesdeTexto() {
 
 async function descargarTxtPuntosDeVenta() {
     const logDiv = document.getElementById('log');
-    logDiv.innerText = "🚀 Iniciando proceso de descarga...";
+    logDiv.innerText = "🚀 Iniciando proceso...";
 
     const apiKeyEl = document.getElementById('apiKeyInput');
     const idSorteoEl = document.getElementById('sorteoSelect');
     const numeroEl = document.getElementById('numeroInput');
 
     if (!apiKeyEl || !idSorteoEl || !numeroEl) {
-        logDiv.innerText = "❌ Error crítico: Faltan elementos en el formulario.";
+        logDiv.innerText = "❌ Error: Faltan elementos en el formulario.";
         return;
     }
 
@@ -122,12 +124,22 @@ async function descargarTxtPuntosDeVenta() {
 
         const response = await fetch(scraperUrl);
         
+        // Obtenemos la respuesta en texto plano para poder diagnosticar errores HTML (como el 404)
+        const textoRespuesta = await response.text();
+
         if (!response.ok) {
-            throw new Error(`Error HTTP del servidor proxy: ${response.status}`);
+            throw new Error(`Error HTTP ${response.status}: ${textoRespuesta.substring(0, 150)}`);
         }
 
-        const data = await response.json();
-        logDiv.innerText = "📦 ¡Datos obtenidos! Generando archivo de texto...";
+        // Intentamos parsear la respuesta como JSON
+        let data;
+        try {
+            data = JSON.parse(textoRespuesta);
+        } catch (e) {
+            throw new Error("El servidor no devolvió un JSON válido: " + textoRespuesta.substring(0, 100));
+        }
+
+        logDiv.innerText = "📦 ¡Datos obtenidos con éxito! Generando archivo de texto...";
 
         let contenidoTxt = `LISTADO DE PUNTOS DE VENTA\n`;
         contenidoTxt += `Número: ${numero} | ID Sorteo: ${idSorteo}\n`;
@@ -151,7 +163,7 @@ async function descargarTxtPuntosDeVenta() {
 
     } catch (error) {
         console.error(error);
-        logDiv.innerText = `❌ Error: ${error.message}. Revisa los créditos de tu API Key o la conexión.`;
+        logDiv.innerText = `❌ Error detallado: ${error.message}`;
     }
 }
 
