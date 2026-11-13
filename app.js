@@ -1,62 +1,47 @@
-async function descargarTxtPuntosDeVenta() {
-    const apiKey = document.getElementById('apiKeyInput').value.trim();
-    const idSorteo = document.getElementById('sorteoSelect').value;
-    const numero = document.getElementById('numeroInput').value.trim();
+function cargarSorteosDesdeTexto() {
+    const htmlCrudo = document.getElementById('jsonInput').value.trim();
+    const selectSorteo = document.getElementById('sorteoSelect');
     const logDiv = document.getElementById('log');
 
-    if (!apiKey) {
-        alert("Por favor, introduce tu API Key de ScraperAPI en la caja superior.");
+    if (!htmlCrudo) {
+        alert("Por favor, pega el código HTML del select en el cuadro superior.");
         return;
     }
-
-    if (!idSorteo || idSorteo === "NONE") {
-        alert("Por favor, selecciona un sorteo válido del desplegable.");
-        return;
-    }
-
-    if (!numero || numero.length !== 5) {
-        alert("Por favor, introduce un número válido de 5 cifras.");
-        return;
-    }
-
-    logDiv.innerText = "Consultando puntos de venta a través de ScraperAPI...";
 
     try {
-        // Usamos los parámetros reales descubiertos: number y drawId
-        const targetUrl = `https://www.loteriasyapuestas.es/servicios/buscadordecimos?number=${numero}&drawId=${idSorteo}`;
-        const scraperUrl = `https://api.scraperapi.com?api_key=${apiKey}&country_code=es&url=${encodeURIComponent(targetUrl)}`;
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlCrudo, 'text/html');
+        const options = doc.querySelectorAll('option');
 
-        const response = await fetch(scraperUrl);
-        
-        if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
-        }
+        selectSorteo.innerHTML = ""; 
+        let contador = 0;
 
-        const data = await response.json();
+        options.forEach(opt => {
+            const val = opt.getAttribute('value');
+            // Decodificamos entidades HTML por si vienen caracteres especiales (como &Iacute;)
+            const txtArea = document.createElement('textarea');
+            txtArea.innerHTML = opt.textContent;
+            const texto = txtArea.value.trim();
 
-        let contenidoTxt = `LISTADO DE PUNTOS DE VENTA\n`;
-        contenidoTxt += `Número: ${numero} | ID Sorteo: ${idSorteo}\n`;
-        contenidoTxt += `==================================================\n\n`;
+            if (val && val !== "NONE" && val !== "") {
+                let option = document.createElement('option');
+                option.value = val;
+                option.text = texto;
+                selectSorteo.appendChild(option);
+                contador++;
+            }
+        });
 
-        if (data.puntosDeVenta && data.puntosDeVenta.length > 0) {
-            data.puntosDeVenta.forEach((pv, index) => {
-                contenidoTxt += `${index + 1}. ${pv.nombre || 'Administración'} - ${pv.direccion}, ${pv.localidad} (${pv.provincia})\n`;
-            });
+        if (contador > 0) {
+            logDiv.innerText = `¡Sorteos cargados con éxito! (${contador} sorteos disponibles).`;
         } else {
-            contenidoTxt += "El décimo no está disponible actualmente o no hay puntos de venta iniciales asignados.\n";
+            selectSorteo.innerHTML = '<option value="NONE">No se encontraron sorteos válidos</option>';
+            logDiv.innerText = "El HTML pegado no contiene opciones de sorteo reconocibles.";
         }
-
-        const blob = new Blob([contenidoTxt], { type: 'text/plain;charset=utf-8' });
-        const enlace = document.createElement('a');
-        enlace.href = URL.createObjectURL(blob);
-        enlace.download = `puntos_venta_${numero}_sorteo_${idSorteo}.txt`;
-        enlace.click();
-
-        logDiv.innerText = `¡Éxito! Archivo de puntos de venta descargado correctamente.`;
 
     } catch (error) {
         console.error(error);
-        logDiv.innerText = "Error al obtener los datos. Comprueba tu API Key y prueba de nuevo.";
+        logDiv.innerText = "Error al procesar el código HTML. Asegúrate de copiar el bloque completo.";
     }
 }
 
