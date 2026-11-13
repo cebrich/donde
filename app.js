@@ -1,3 +1,4 @@
+// Al cargar la página, configuramos eventos y recuperamos la API Key guardada
 document.addEventListener('DOMContentLoaded', () => {
     const savedKey = localStorage.getItem('scraper_api_key');
     if (savedKey) {
@@ -82,7 +83,7 @@ function cargarSorteosDesdeTexto() {
 
 async function descargarTxtPuntosDeVenta() {
     const logDiv = document.getElementById('log');
-    logDiv.innerText = "🚀 Iniciando proceso...";
+    logDiv.innerText = "🚀 Iniciando descarga directa del servlet oficial...";
 
     const apiKeyEl = document.getElementById('apiKeyInput');
     const idSorteoEl = document.getElementById('sorteoSelect');
@@ -112,63 +113,35 @@ async function descargarTxtPuntosDeVenta() {
         return;
     }
 
-    const cantCatchMe = Math.floor(Math.random() * 900) + 100;
-    const targetUrl = `https://www.loteriasyapuestas.es/new-geo-web/JsonGenerationServlet/posbydraw.json?drawId=${encodeURIComponent(idSorteo)}&number=${encodeURIComponent(numero)}&cantCatchMe=${cantCatchMe}`;
-    
-    // Activamos keep_headers=true para imitar la petición AJAX oficial
-    const scraperUrl = `https://api.scraperapi.com?api_key=${apiKey}&country_code=es&keep_headers=true&url=${encodeURIComponent(targetUrl)}`;
+    // URL exacta del servlet de descarga de puntos de venta descubierta en el inspector[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)
+    const targetUrl = `https://www.loteriasyapuestas.es/new-geo-web/GetTerminalServlet/Sorteo2026txt.csv?drawId=${encodeURIComponent(idSorteo)}&locale=es`;
+    const scraperUrl = `https://api.scraperapi.com?api_key=${apiKey}&country_code=es&url=${encodeURIComponent(targetUrl)}`;
 
-    logDiv.innerText = `⏳ Consultando URL:\n${targetUrl}`;
+    logDiv.innerText = `⏳ Solicitando archivo al servidor oficial...`;
 
     try {
-        const response = await fetch(scraperUrl, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json, text/javascript, */*; q=0.01',
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        });
-
+        const response = await fetch(scraperUrl);
         const textoRespuesta = await response.text();
 
         if (!response.ok) {
-            throw new Error(`HTTP ${response.status} en URL: ${targetUrl}\nRespuesta: ${textoRespuesta.substring(0, 120)}`);
+            throw new Error(`HTTP ${response.status}. Respuesta: ${textoRespuesta.substring(0, 120)}`);
         }
 
-        let data;
-        try {
-            data = JSON.parse(textoRespuesta);
-        } catch (e) {
-            throw new Error("El servidor no devolvió JSON válido: " + textoRespuesta.substring(0, 100));
+        // Verificamos que hayamos recibido contenido válido de puntos de venta
+        if (!textoRespuesta || textoRespuesta.includes("<!DOCTYPE html>")) {
+            throw new Error("El servidor devolvió una página de error en lugar del archivo.");
         }
 
-        logDiv.innerText = "📦 ¡Datos obtenidos con éxito! Generando archivo...";
+        logDiv.innerText = "📦 ¡Archivo recibido con éxito! Preparando descarga...";
 
-        let contenidoTxt = `LISTADO DE PUNTOS DE VENTA\n`;
-        contenidoTxt += `Número: ${numero} | ID Sorteo: ${idSorteo}\n`;
-        contenidoTxt += `==================================================\n\n`;
-
-        const puntos = data.puntosDeVenta || data.puntos || data.listaPuntosDeVenta || (Array.isArray(data) ? data : []);
-
-        if (puntos && puntos.length > 0) {
-            puntos.forEach((pv, index) => {
-                const nombre = pv.nombre || pv.denominacion || 'Administración';
-                const direccion = pv.direccion || pv.calle || '';
-                const localidad = pv.localidad || pv.poblacion || '';
-                const provincia = pv.provincia || '';
-                contenidoTxt += `${index + 1}. ${nombre} - ${direccion}, ${localidad} (${provincia})\n`;
-            });
-        } else {
-            contenidoTxt += "El décimo no está disponible actualmente o no hay puntos de venta asignados para este número.\n";
-        }
-
-        const blob = new Blob([contenidoTxt], { type: 'text/plain;charset=utf-8' });
+        // Creamos y disparamos la descarga del archivo de texto/CSV directamente
+        const blob = new Blob([textoRespuesta], { type: 'text/plain;charset=utf-8' });
         const enlace = document.createElement('a');
         enlace.href = URL.createObjectURL(blob);
-        enlace.download = `puntos_venta_${numero}_sorteo_${idSorteo}.txt`;
+        enlace.download = `puntos_venta_sorteo_${idSorteo}.txt`;
         enlace.click();
 
-        logDiv.innerText = `✅ ¡Listo! Archivo puntos_venta_${numero}_sorteo_${idSorteo}.txt descargado correctamente.`;
+        logDiv.innerText = `✅ ¡Listo! Archivo de puntos de venta descargado correctamente.`;
 
     } catch (error) {
         console.error(error);
