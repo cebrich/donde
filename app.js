@@ -1,6 +1,5 @@
 // Al cargar la página, configuramos eventos y recuperamos la API Key guardada
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Recuperar API Key guardada de forma privada
     const savedKey = localStorage.getItem('scraper_api_key');
     if (savedKey) {
         const apiKeyInput = document.getElementById('apiKeyInput');
@@ -9,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 2. Vincular los botones de forma segura
     const btnCargar = document.getElementById('btnCargar');
     if (btnCargar) {
         btnCargar.addEventListener('click', cargarSorteosDesdeTexto);
@@ -57,7 +55,6 @@ function cargarSorteosDesdeTexto() {
 
         options.forEach(opt => {
             const val = opt.getAttribute('value');
-            // Decodificamos entidades HTML (ej. &Iacute;)
             const txtArea = document.createElement('textarea');
             txtArea.innerHTML = opt.textContent;
             const texto = txtArea.value.trim();
@@ -116,11 +113,11 @@ async function descargarTxtPuntosDeVenta() {
         return;
     }
 
-    // Ruta actualizada con el subdirectorio correcto del buscador oficial
-    const targetUrl = `https://www.loteriasyapuestas.es/es/buscador-decimos/servicios/buscadordecimos?number=${numero}&drawId=${idSorteo}`;
+    // Ruta exacta obtenida del inspector de red oficial
+    const targetUrl = `https://www.loteriasyapuestas.es/new-geo-web/JsonGenerationServlet/posbydraw.json?drawId=${idSorteo}&number=${numero}`;
     const scraperUrl = `https://api.scraperapi.com?api_key=${apiKey}&country_code=es&url=${encodeURIComponent(targetUrl)}`;
 
-    logDiv.innerText = `⏳ Conectando con ScraperAPI...`;
+    logDiv.innerText = `⏳ Consultando servlet oficial de geolocalización...`;
 
     try {
         const response = await fetch(scraperUrl);
@@ -143,12 +140,19 @@ async function descargarTxtPuntosDeVenta() {
         contenidoTxt += `Número: ${numero} | ID Sorteo: ${idSorteo}\n`;
         contenidoTxt += `==================================================\n\n`;
 
-        if (data.puntosDeVenta && data.puntosDeVenta.length > 0) {
-            data.puntosDeVenta.forEach((pv, index) => {
-                contenidoTxt += `${index + 1}. ${pv.nombre || 'Administración'} - ${pv.direccion}, ${pv.localidad} (${pv.provincia})\n`;
+        // Ajustamos la lectura según la estructura JSON que devuelve el servlet posbydraw.json
+        const puntos = data.puntosDeVenta || data.puntos || data.listaPuntosDeVenta || (Array.isArray(data) ? data : []);
+
+        if (puntos && puntos.length > 0) {
+            puntos.forEach((pv, index) => {
+                const nombre = pv.nombre || pv.denominacion || 'Administración';
+                const direccion = pv.direccion || pv.calle || '';
+                const localidad = pv.localidad || pv.poblacion || '';
+                const provincia = pv.provincia || '';
+                contenidoTxt += `${index + 1}. ${nombre} - ${direccion}, ${localidad} (${provincia})\n`;
             });
         } else {
-            contenidoTxt += "El décimo no está disponible actualmente o no hay puntos de venta iniciales asignados para este número.\n";
+            contenidoTxt += "El décimo no está disponible actualmente o no hay puntos de venta asignados para este número.\n";
         }
 
         const blob = new Blob([contenidoTxt], { type: 'text/plain;charset=utf-8' });
