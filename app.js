@@ -1,11 +1,27 @@
-// Al cargar la página, recuperamos la API Key guardada de forma privada en el navegador si existe
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Recuperar API Key guardada
     const savedKey = localStorage.getItem('scraper_api_key');
     if (savedKey) {
         const apiKeyInput = document.getElementById('apiKeyInput');
         if (apiKeyInput) {
             apiKeyInput.value = savedKey;
         }
+    }
+
+    // 2. Vincular botones de forma segura por código (evita fallos de caché o inline)
+    const btnCargar = document.getElementById('btnCargar');
+    if (btnCargar) {
+        btnCargar.addEventListener('click', cargarSorteosDesdeTexto);
+    }
+
+    const btnGenerar = document.getElementById('btnGenerar');
+    if (btnGenerar) {
+        btnGenerar.addEventListener('click', descargarTxtPuntosDeVenta);
+    }
+
+    const apiKeyInput = document.getElementById('apiKeyInput');
+    if (apiKeyInput) {
+        apiKeyInput.addEventListener('input', guardarApiKey);
     }
 });
 
@@ -40,10 +56,102 @@ function cargarSorteosDesdeTexto() {
 
         options.forEach(opt => {
             const val = opt.getAttribute('value');
-            // Decodificamos entidades HTML por si vienen caracteres especiales (como &Iacute;)
             const txtArea = document.createElement('textarea');
             txtArea.innerHTML = opt.textContent;
             const texto = txtArea.value.trim();
 
-            if (val && val !==
+            if (val && val !== "NONE" && val !== "") {
+                let option = document.createElement('option');
+                option.value = val;
+                option.text = texto;
+                selectSorteo.appendChild(option);
+                contador++;
+            }
+        });
+
+        if (contador > 0) {
+            logDiv.innerText = `✅ ¡Sorteos cargados con éxito! (${contador} sorteos disponibles).`;
+        } else {
+            selectSorteo.innerHTML = '<option value="NONE">No se encontraron sorteos válidos</option>';
+            logDiv.innerText = "⚠️ El HTML pegado no contiene opciones de sorteo reconocibles.";
+        }
+
+    } catch (error) {
+        console.error(error);
+        logDiv.innerText = "❌ Error al procesar el código HTML. Asegúrate de copiar el bloque completo.";
+    }
+}
+
+async function descargarTxtPuntosDeVenta() {
+    const logDiv = document.getElementById('log');
+    logDiv.innerText = "🚀 Iniciando proceso de descarga...";
+
+    const apiKeyEl = document.getElementById('apiKeyInput');
+    const idSorteoEl = document.getElementById('sorteoSelect');
+    const numeroEl = document.getElementById('numeroInput');
+
+    if (!apiKeyEl || !idSorteoEl || !numeroEl) {
+        logDiv.innerText = "❌ Error crítico: Faltan elementos en el formulario.";
+        return;
+    }
+
+    const apiKey = apiKeyEl.value.trim();
+    const idSorteo = idSorteoEl.value;
+    const numero = numeroEl.value.trim();
+
+    if (!apiKey) {
+        logDiv.innerText = "⚠️ Falta introducir la API Key de ScraperAPI en la caja superior.";
+        return;
+    }
+
+    if (!idSorteo || idSorteo === "NONE" || idSorteo === "") {
+        logDiv.innerText = "⚠️ Debes cargar los sorteos y seleccionar uno válido del desplegable.";
+        return;
+    }
+
+    if (!numero || numero.length !== 5) {
+        logDiv.innerText = "⚠️ El número de décimo debe tener exactamente 5 cifras.";
+        return;
+    }
+
+    logDiv.innerText = `⏳ Consultando sorteo (${idSorteo}) para el número ${numero} a través de ScraperAPI...`;
+
+    try {
+        const targetUrl = `https://www.loteriasyapuestas.es/servicios/buscadordecimos?number=${numero}&drawId=${idSorteo}`;
+        const scraperUrl = `https://api.scraperapi.com?api_key=${apiKey}&country_code=es&url=${encodeURIComponent(targetUrl)}`;
+
+        const response = await fetch(scraperUrl);
+        
+        if (!response.ok) {
+            throw new Error(`Error HTTP del servidor proxy: ${response.status}`);
+        }
+
+        const data = await response.json();
+        logDiv.innerText = "📦 ¡Datos obtenidos! Generando archivo de texto...";
+
+        let contenidoTxt = `LISTADO DE PUNTOS DE VENTA\n`;
+        contenidoTxt += `Número: ${numero} | ID Sorteo: ${idSorteo}\n`;
+        contenidoTxt += `==================================================\n\n`;
+
+        if (data.puntosDeVenta && data.puntosDeVenta.length > 0) {
+            data.puntosDeVenta.forEach((pv, index) => {
+                contenidoTxt += `${index + 1}. ${pv.nombre || 'Administración'} - ${pv.direccion}, ${pv.localidad} (${pv.provincia})\n`;
+            });
+        } else {
+            contenidoTxt += "El décimo no está disponible actualmente o no hay puntos de venta iniciales asignados para este número.\n";
+        }
+
+        const blob = new Blob([contenidoTxt], { type: 'text/plain;charset=utf-8' });
+        const enlace = document.createElement('a');
+        enlace.href = URL.createObjectURL(blob);
+        enlace.download = `puntos_venta_${numero}_sorteo_${idSorteo}.txt`;
+        enlace.click();
+
+        logDiv.innerText = `✅ ¡Listo! Archivo puntos_venta_${numero}_sorteo_${idSorteo}.txt descargado correctamente.`;
+
+    } catch (error) {
+        console.error(error);
+        logDiv.innerText = `❌ Error: ${error.message}. Revisa los créditos de tu API Key o la conexión.`;
+    }
+}
 

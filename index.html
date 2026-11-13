@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscador de Puntos de Venta - Loterías</title>
+    
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; color: #333; }
         .container { max-width: 650px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
@@ -26,16 +27,18 @@
 <div class="container">
     <h2>Buscador y Descarga de Puntos de Venta</h2>
     
-    <!-- CONFIGURACIÓN PRIVADA DE SCRAPERAPI (No se sube expuesta a GitHub) -->
+    <!-- CONFIGURACIÓN PRIVADA DE SCRAPERAPI -->
     <div class="config-box">
         <label for="apiKeyInput" style="font-size: 13px; margin-top:0;">🔑 Tu API Key de ScraperAPI (Privada):</label>
-        <input type="password" id="apiKeyInput" placeholder="Pega aquí tu clave (se guarda solo en tu navegador)" onchange="guardarApiKey()">
+        <input type="password" id="apiKeyInput" placeholder="Pega aquí tu clave (se guarda solo en tu navegador)">
     </div>
 
     <!-- SECCIÓN PARA PEGAR EL CÓDIGO HTML DE LOS SORTEOS -->
     <label for="jsonInput">Pega aquí el código HTML del select (&lt;select&gt;...&lt;/select&gt;) de la web original:</label>
     <textarea id="jsonInput" placeholder="Pega aquí el bloque HTML con los sorteos..."></textarea>
-    <button class="btn-secundario" onclick="cargarSorteosDesdeTexto()">Cargar Sorteos en el Selector</button>
+    
+    <!-- Botón con ID seguro para el script -->
+    <button id="btnCargar" class="btn-secundario" type="button">Cargar Sorteos en el Selector</button>
 
     <hr>
 
@@ -47,7 +50,8 @@
     <label for="numeroInput">Número de Décimo (5 cifras):</label>
     <input type="text" id="numeroInput" maxlength="5" placeholder="Ej. 13648">
 
-    <button onclick="descargarTxtPuntosDeVenta()">Generar y Descargar .txt</button>
+    <!-- Botón con ID seguro para la descarga -->
+    <button id="btnGenerar" type="button">Generar y Descargar .txt</button>
 
     <div id="log">Estado: Listo para configurar y buscar.</div>
 </div>
