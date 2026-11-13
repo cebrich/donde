@@ -1,4 +1,3 @@
-// Al cargar la página, configuramos eventos y recuperamos la API Key guardada
 document.addEventListener('DOMContentLoaded', () => {
     const savedKey = localStorage.getItem('scraper_api_key');
     if (savedKey) {
@@ -61,8 +60,8 @@ function cargarSorteosDesdeTexto() {
 
             if (val && val !== "NONE" && val !== "") {
                 let option = document.createElement('option');
-                option.value = val;
-                option.text = texto;
+                option.value = val.trim();
+                option.text = `${texto} [ID: ${val.trim()}]`;
                 selectSorteo.appendChild(option);
                 contador++;
             }
@@ -95,7 +94,7 @@ async function descargarTxtPuntosDeVenta() {
     }
 
     const apiKey = apiKeyEl.value.trim();
-    const idSorteo = idSorteoEl.value;
+    const idSorteo = idSorteoEl.value.trim();
     const numero = numeroEl.value.trim();
 
     if (!apiKey) {
@@ -113,36 +112,42 @@ async function descargarTxtPuntosDeVenta() {
         return;
     }
 
-    // Añadimos el parámetro cantCatchMe con un número aleatorio tal como exige el servlet oficial
     const cantCatchMe = Math.floor(Math.random() * 900) + 100;
-    const targetUrl = `https://www.loteriasyapuestas.es/new-geo-web/JsonGenerationServlet/posbydraw.json?drawId=${idSorteo}&number=${numero}&cantCatchMe=${cantCatchMe}`;
-    const scraperUrl = `https://api.scraperapi.com?api_key=${apiKey}&country_code=es&url=${encodeURIComponent(targetUrl)}`;
+    const targetUrl = `https://www.loteriasyapuestas.es/new-geo-web/JsonGenerationServlet/posbydraw.json?drawId=${encodeURIComponent(idSorteo)}&number=${encodeURIComponent(numero)}&cantCatchMe=${cantCatchMe}`;
+    
+    // Activamos keep_headers=true para imitar la petición AJAX oficial
+    const scraperUrl = `https://api.scraperapi.com?api_key=${apiKey}&country_code=es&keep_headers=true&url=${encodeURIComponent(targetUrl)}`;
 
-    logDiv.innerText = `⏳ Consultando servlet oficial...`;
+    logDiv.innerText = `⏳ Consultando URL:\n${targetUrl}`;
 
     try {
-        const response = await fetch(scraperUrl);
+        const response = await fetch(scraperUrl, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json, text/javascript, */*; q=0.01',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+
         const textoRespuesta = await response.text();
 
-        // Mostramos el código HTTP exacto en pantalla para diagnóstico si falla
         if (!response.ok) {
-            throw new Error(`HTTP ${response.status} - Respuesta: ${textoRespuesta.substring(0, 120)}`);
+            throw new Error(`HTTP ${response.status} en URL: ${targetUrl}\nRespuesta: ${textoRespuesta.substring(0, 120)}`);
         }
 
         let data;
         try {
             data = JSON.parse(textoRespuesta);
         } catch (e) {
-            throw new Error("El servidor no devolvió un JSON válido: " + textoRespuesta.substring(0, 100));
+            throw new Error("El servidor no devolvió JSON válido: " + textoRespuesta.substring(0, 100));
         }
 
-        logDiv.innerText = "📦 ¡Datos obtenidos con éxito! Generando archivo de texto...";
+        logDiv.innerText = "📦 ¡Datos obtenidos con éxito! Generando archivo...";
 
         let contenidoTxt = `LISTADO DE PUNTOS DE VENTA\n`;
         contenidoTxt += `Número: ${numero} | ID Sorteo: ${idSorteo}\n`;
         contenidoTxt += `==================================================\n\n`;
 
-        // Analizamos las posibles variantes de claves en el JSON del servlet
         const puntos = data.puntosDeVenta || data.puntos || data.listaPuntosDeVenta || (Array.isArray(data) ? data : []);
 
         if (puntos && puntos.length > 0) {
@@ -154,7 +159,7 @@ async function descargarTxtPuntosDeVenta() {
                 contenidoTxt += `${index + 1}. ${nombre} - ${direccion}, ${localidad} (${provincia})\n`;
             });
         } else {
-            contenidoTxt += "El décimo no está disponible actualmente o no hay puntos de venta iniciales asignados para este número.\n";
+            contenidoTxt += "El décimo no está disponible actualmente o no hay puntos de venta asignados para este número.\n";
         }
 
         const blob = new Blob([contenidoTxt], { type: 'text/plain;charset=utf-8' });
