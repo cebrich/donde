@@ -1,10 +1,32 @@
+// Al cargar la página, recuperamos la API Key guardada de forma privada en el navegador si existe
+document.addEventListener('DOMContentLoaded', () => {
+    const savedKey = localStorage.getItem('scraper_api_key');
+    if (savedKey) {
+        const apiKeyInput = document.getElementById('apiKeyInput');
+        if (apiKeyInput) {
+            apiKeyInput.value = savedKey;
+        }
+    }
+});
+
+function guardarApiKey() {
+    const key = document.getElementById('apiKeyInput').value.trim();
+    const logDiv = document.getElementById('log');
+    if (key) {
+        localStorage.setItem('scraper_api_key', key);
+        if (logDiv) {
+            logDiv.innerText = "🔑 API Key guardada de forma segura en tu navegador.";
+        }
+    }
+}
+
 function cargarSorteosDesdeTexto() {
     const htmlCrudo = document.getElementById('jsonInput').value.trim();
     const selectSorteo = document.getElementById('sorteoSelect');
     const logDiv = document.getElementById('log');
 
     if (!htmlCrudo) {
-        alert("Por favor, pega el código HTML del select en el cuadro superior.");
+        logDiv.innerText = "⚠️ Por favor, pega el código HTML del select en el cuadro superior.";
         return;
     }
 
@@ -23,25 +45,5 @@ function cargarSorteosDesdeTexto() {
             txtArea.innerHTML = opt.textContent;
             const texto = txtArea.value.trim();
 
-            if (val && val !== "NONE" && val !== "") {
-                let option = document.createElement('option');
-                option.value = val;
-                option.text = texto;
-                selectSorteo.appendChild(option);
-                contador++;
-            }
-        });
-
-        if (contador > 0) {
-            logDiv.innerText = `¡Sorteos cargados con éxito! (${contador} sorteos disponibles).`;
-        } else {
-            selectSorteo.innerHTML = '<option value="NONE">No se encontraron sorteos válidos</option>';
-            logDiv.innerText = "El HTML pegado no contiene opciones de sorteo reconocibles.";
-        }
-
-    } catch (error) {
-        console.error(error);
-        logDiv.innerText = "Error al procesar el código HTML. Asegúrate de copiar el bloque completo.";
-    }
-}
+            if (val && val !==
 
