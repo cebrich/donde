@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnGenerar = document.getElementById('btnGenerar');
     if (btnGenerar) {
-        btnGenerar.addEventListener('click', descargarTxtPuntosDeVenta);
+        btnGenerar.addEventListener('click', generarEnlaceDescarga);
     }
 
     const apiKeyInput = document.getElementById('apiKeyInput');
@@ -81,71 +81,25 @@ function cargarSorteosDesdeTexto() {
     }
 }
 
-async function descargarTxtPuntosDeVenta() {
+function generarEnlaceDescarga() {
     const logDiv = document.getElementById('log');
-    logDiv.innerText = "🚀 Iniciando descarga directa del servlet oficial...";
-
-    const apiKeyEl = document.getElementById('apiKeyInput');
     const idSorteoEl = document.getElementById('sorteoSelect');
-    const numeroEl = document.getElementById('numeroInput');
 
-    if (!apiKeyEl || !idSorteoEl || !numeroEl) {
+    if (!idSorteoEl) {
         logDiv.innerText = "❌ Error: Faltan elementos en el formulario.";
         return;
     }
 
-    const apiKey = apiKeyEl.value.trim();
     const idSorteo = idSorteoEl.value.trim();
-    const numero = numeroEl.value.trim();
-
-    if (!apiKey) {
-        logDiv.innerText = "⚠️ Falta introducir la API Key de ScraperAPI en la caja superior.";
-        return;
-    }
 
     if (!idSorteo || idSorteo === "NONE" || idSorteo === "") {
         logDiv.innerText = "⚠️ Debes cargar los sorteos y seleccionar uno válido del desplegable.";
         return;
     }
 
-    if (!numero || numero.length !== 5) {
-        logDiv.innerText = "⚠️ El número de décimo debe tener exactamente 5 cifras.";
-        return;
-    }
+    // Construimos la URL exacta del servlet de puntos de venta descubierta en las capturas de red[span_0](start_span)[span_0](end_span)[span_1](start_span)[span_1](end_span)
+    const urlDirecta = `https://www.loteriasyapuestas.es/new-geo-web/GetTerminalServlet/Sorteo2026txt.csv?drawId=${encodeURIComponent(idSorteo)}&locale=es`;
 
-    // URL exacta del servlet de descarga de puntos de venta descubierta en el inspector[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)
-    const targetUrl = `https://www.loteriasyapuestas.es/new-geo-web/GetTerminalServlet/Sorteo2026txt.csv?drawId=${encodeURIComponent(idSorteo)}&locale=es`;
-    const scraperUrl = `https://api.scraperapi.com?api_key=${apiKey}&country_code=es&url=${encodeURIComponent(targetUrl)}`;
-
-    logDiv.innerText = `⏳ Solicitando archivo al servidor oficial...`;
-
-    try {
-        const response = await fetch(scraperUrl);
-        const textoRespuesta = await response.text();
-
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}. Respuesta: ${textoRespuesta.substring(0, 120)}`);
-        }
-
-        // Verificamos que hayamos recibido contenido válido de puntos de venta
-        if (!textoRespuesta || textoRespuesta.includes("<!DOCTYPE html>")) {
-            throw new Error("El servidor devolvió una página de error en lugar del archivo.");
-        }
-
-        logDiv.innerText = "📦 ¡Archivo recibido con éxito! Preparando descarga...";
-
-        // Creamos y disparamos la descarga del archivo de texto/CSV directamente
-        const blob = new Blob([textoRespuesta], { type: 'text/plain;charset=utf-8' });
-        const enlace = document.createElement('a');
-        enlace.href = URL.createObjectURL(blob);
-        enlace.download = `puntos_venta_sorteo_${idSorteo}.txt`;
-        enlace.click();
-
-        logDiv.innerText = `✅ ¡Listo! Archivo de puntos de venta descargado correctamente.`;
-
-    } catch (error) {
-        console.error(error);
-        logDiv.innerText = `❌ Error: ${error.message}`;
-    }
+    logDiv.innerHTML = `✅ ¡Enlace generado con éxito!<br><br>👉 <a href="${urlDirecta}" target="_blank" style="color: #0056b3; font-weight: bold; text-decoration: underline;">Haz clic aquí para descargar el archivo oficial de puntos de venta</a>`;
 }
 
