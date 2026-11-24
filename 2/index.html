@@ -1797,8 +1797,8 @@
             if (img.dataset.k === key) return;
             img.dataset.k = key; box.style.display = 'none';
             if (!key) return;
-            const y0 = d.fecha ? +d.fecha.slice(0, 4) : new Date().getFullYear();
-            const urls = IMG_OK[key] ? [IMG_OK[key]] : [y0, y0 + 1, y0 - 1].map(a => `${IMG_DECIMO}s${d.numero}_${a}_pc.jpg`);
+            if (!d.fecha) return;   // sin fecha no se sabe el año y cada año repite números: mejor sin imagen que una equivocada
+            const urls = [`${IMG_DECIMO}s${d.numero}_${d.fecha.slice(0, 4)}_pc.jpg`];
             let i = 0;
             img.onload = () => { if (img.dataset.k === key) { IMG_OK[key] = img.src; box.style.display = 'flex'; } };
             img.onerror = () => { if (img.dataset.k !== key) return; if (++i < urls.length) img.src = urls[i]; else box.style.display = 'none'; };
