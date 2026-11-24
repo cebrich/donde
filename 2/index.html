@@ -777,7 +777,33 @@
         const REFRESH_MIN = 30;  // vuelve a descargar los PDFs cada 30 minutos
         const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs';
         const PDFJS_WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs';
-        let pdfjsLib = null;
+        // Para navegadores antiguos (Chrome/Opera < 119, p. ej. Android 5): PDF.js 3.11 "legacy" (script clásico, sin sintaxis moderna)
+        const PDFJS_LEGACY = [
+            ['https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.min.js', 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.worker.min.js'],
+            ['https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js']
+        ];
+        let pdfjsLib = null, pdfjsP = null, PDF_ERR = '';
+        const loadScript = src => new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = src; sc.onload = ok; sc.onerror = () => ko(new Error('no se pudo cargar ' + src)); document.head.appendChild(sc); });
+        function getPdfjs() {
+            if (pdfjsP) return pdfjsP;
+            pdfjsP = (async () => {
+                const forceLegacy = new URLSearchParams(location.search).get('pdfjs') === 'legacy';
+                const moderno = !forceLegacy && typeof Promise.withResolvers === 'function' && typeof structuredClone === 'function' && typeof Array.prototype.at === 'function';
+                if (moderno) {
+                    try { const m = await import(PDFJS_URL); m.GlobalWorkerOptions.workerSrc = PDFJS_WORKER; return m; } catch (e) { PDF_ERR = 'visor moderno: ' + e.message; }
+                }
+                for (const [lib, worker] of PDFJS_LEGACY) {
+                    try {
+                        await loadScript(lib);
+                        if (!window.pdfjsLib) throw new Error('PDF.js no se inició');
+                        window.pdfjsLib.GlobalWorkerOptions.workerSrc = worker; PDF_ERR = ''; return window.pdfjsLib;
+                    } catch (e) { PDF_ERR = e.message; }
+                }
+                throw new Error(PDF_ERR || 'visor de PDF no disponible');
+            })();
+            pdfjsP.catch(() => { pdfjsP = null; });   // permite reintentar en la siguiente actualización
+            return pdfjsP;
+        }
 
         // Semana ISO (la "S46" de los nombres de archivo)
         function isoWeekOf(d) {
@@ -805,10 +831,7 @@
 
         // Descarga un PDF y devuelve sus hojas como imágenes recortadas (lanza error si no existe)
         async function loadPdfPages(url) {
-            if (!pdfjsLib) {
-                pdfjsLib = await import(PDFJS_URL);
-                pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
-            }
+            pdfjsLib = await getPdfjs();
             const pdf = await pdfjsLib.getDocument({ url }).promise;
             const pages = [];
             for (let n = 1; n <= pdf.numPages; n++) {
@@ -1303,7 +1326,7 @@
                     </div>
 
                     <!-- Resultado oficial incrustado desde loteriasyapuestas.es -->
-                    ${LOCAL_PAGES[gameKey] ? renderPager(gameKey, { vertical: true }) : (bono && bono.loading) ? `<div class="flex-1 w-full flex items-center justify-center text-sm font-bold text-[#0b56a8]">Cargando resultados…</div>` : `<div class="flex-1 w-full flex flex-col items-center justify-center text-center gap-2 text-[#0b56a8]"><div style="font-size:clamp(18px,3vh,30px); font-weight:800;">Resultados todavía no disponibles</div><div style="font-size:clamp(12px,1.8vh,18px); font-weight:600; color:#64748b;">Desliza el dedo para ver otro sorteo o usa "Otras Fechas"</div></div>`}
+                    ${LOCAL_PAGES[gameKey] ? renderPager(gameKey, { vertical: true }) : (bono && bono.loading) ? `<div class="flex-1 w-full flex items-center justify-center text-sm font-bold text-[#0b56a8]">Cargando resultados…</div>` : `<div class="flex-1 w-full flex flex-col items-center justify-center text-center gap-2 text-[#0b56a8]"><div style="font-size:clamp(18px,3vh,30px); font-weight:800;">Resultados todavía no disponibles</div>${PDF_ERR ? `<div style="font-size:11px; color:#94a3b8;">(${PDF_ERR})</div>` : ''}<div style="font-size:clamp(12px,1.8vh,18px); font-weight:600; color:#64748b;">Desliza el dedo para ver otro sorteo o usa "Otras Fechas"</div></div>`}
 
                 </div>
             `;
@@ -1709,7 +1732,8 @@
                             <div id="tb-modes" style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;"></div>
                             <div id="tb-q" style="height:clamp(60px,9vh,90px); border-radius:16px; background:#fff; border:3px solid #0b56a8; display:flex; align-items:center; justify-content:center; font-family:Consolas,monospace; font-weight:800; font-size:clamp(30px,5vh,48px); letter-spacing:.25em; color:#0b56a8;"></div>
                             <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">${keys}</div>
-                            <div id="tb-upd" style="text-align:center; font-size:clamp(11px,1.6vh,15px); font-weight:700; color:#475569; line-height:1.3;"></div>
+                            <div id="tb-upd" style="text-align:center; font-size:clamp(9px,1.35vh,13px); font-weight:700; color:#475569; line-height:1.2; white-space:nowrap;"></div>
+                            <div id="tb-decimo" style="flex:1 1 0; min-height:0; display:none; align-items:flex-start; justify-content:center;"><img id="tb-decimo-img" alt="Décimo del sorteo" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:10px; box-shadow:0 4px 14px rgba(11,86,168,.2); background:#fff;"></div>
                         </div>
                         <div style="flex:1 1 0; min-width:0; display:flex; flex-direction:column; background:rgba(255,255,255,.92); border-radius:16px; box-shadow:0 6px 20px rgba(40,30,90,.18); overflow:hidden;">
                             <div id="tb-head" style="padding:10px 16px; font-weight:800; color:#0b56a8; border-bottom:2px solid #dbeafe; font-size:clamp(14px,2vh,20px);"></div>
@@ -1765,6 +1789,21 @@
         function tbBack() { state.searchNumber = state.searchNumber.slice(0, -1); tbPaint(); }
         function tbClear() { state.searchNumber = ''; tbPaint(); }
 
+        // Imagen del décimo del sorteo elegido: .../capillas/s<nº sorteo>_<año>_pc.jpg (nº y fecha vienen de data/sorteos.json)
+        const IMG_DECIMO = 'https://www.loteriasyapuestas.es/f/loterias/imagenes/estaticos/capillas/', IMG_OK = {};
+        function tbDecimo(d) {
+            const box = document.getElementById('tb-decimo'), img = document.getElementById('tb-decimo-img'); if (!box) return;
+            const key = d && d.numero ? d.numero + '|' + (d.fecha || '') : '';
+            if (img.dataset.k === key) return;
+            img.dataset.k = key; box.style.display = 'none';
+            if (!key) return;
+            const y0 = d.fecha ? +d.fecha.slice(0, 4) : new Date().getFullYear();
+            const urls = IMG_OK[key] ? [IMG_OK[key]] : [y0, y0 + 1, y0 - 1].map(a => `${IMG_DECIMO}s${d.numero}_${a}_pc.jpg`);
+            let i = 0;
+            img.onload = () => { if (img.dataset.k === key) { IMG_OK[key] = img.src; box.style.display = 'flex'; } };
+            img.onerror = () => { if (img.dataset.k !== key) return; if (++i < urls.length) img.src = urls[i]; else box.style.display = 'none'; };
+            img.src = urls[0];
+        }
         function tbPaint() {
             const $ = id => document.getElementById(id); if (!$('tb-draws')) return;
             const chip = (on, extra = '') => `border-radius:999px; padding:7px 16px; font-weight:800; font-size:clamp(12px,1.7vh,16px); ${on ? 'background:#0b56a8; color:#fff;' : 'background:#fff; color:#0b56a8; border:2px solid #0b56a8;'} ${extra}`;
@@ -1774,8 +1813,9 @@
             $('tb-q').textContent = q || '·'.repeat(M.max === 5 ? 5 : 2);
             const head = $('tb-head'), box = $('tb-results');
             const d = TB.draws[TB.idx], data = d && TB.cache[tbFile(d)];
+            tbDecimo(d);
             const u = data && data.upd, p2 = n => String(n).padStart(2, '0');
-            $('tb-upd').innerHTML = u && !isNaN(u) ? `Datos a fecha del<br>${p2(u.getDate())}/${p2(u.getMonth() + 1)}/${u.getFullYear()} a las ${p2(u.getHours())}:${p2(u.getMinutes())}` : (data ? 'Fecha de actualización no disponible' : '');
+            $('tb-upd').innerHTML = u && !isNaN(u) ? `Datos a fecha del ${p2(u.getDate())}/${p2(u.getMonth() + 1)}/${u.getFullYear()} a las ${p2(u.getHours())}:${p2(u.getMinutes())}` : (data ? 'Fecha de actualización no disponible' : '');
             const info = (t, c = '#64748b') => { box.innerHTML = `<div style="height:100%; display:flex; align-items:center; justify-content:center; text-align:center; font-weight:700; color:${c}; font-size:clamp(14px,2.2vh,22px); padding:20px;">${t}</div>`; };
             if (TB.loading) { head.textContent = d ? tbLabel(d) : ''; return info('Cargando listado de números…', '#0b56a8'); }
             if (TB.err) { head.textContent = ''; return info(TB.err, '#c62828'); }
