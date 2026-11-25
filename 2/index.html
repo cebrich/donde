@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Terminal Táctil - Loterías y Apuestas del Estado</title>
-    <!-- Tailwind CSS para utilidades y diseño responsivo -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Fuente Inter para alta legibilidad en pantallas táctiles -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
     <style>
         /* Estilos base optimizados para kiosco táctil panorámico */
@@ -104,6 +102,8 @@
         }
             @keyframes spin { to { transform: rotate(360deg); } }
     </style>
+    <!-- Utilidades Tailwind precompiladas (solo las clases usadas) -->
+    <style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{top:0px;right:0px;bottom:0px;left:0px;}.left-\[108\%\]{left:108%}.right-1\.5{right:0.375rem}.right-2{right:0.5rem}.top-0{top:0px}.top-1{top:0.25rem}.top-1\.5{top:0.375rem}.z-0{z-index:0}.z-10{z-index:10}.z-20{z-index:20}.z-50{z-index:50}.col-span-2{grid-column:span 2 / span 2}.my-2{margin-top:0.5rem;margin-bottom:0.5rem}.my-auto{margin-top:auto;margin-bottom:auto}.mb-0\.5{margin-bottom:0.125rem}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-2\.5{margin-bottom:0.625rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.ml-1{margin-left:0.25rem}.mt-0\.5{margin-top:0.125rem}.mt-1{margin-top:0.25rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.table{display:table}.grid{display:grid}.hidden{display:none}.h-1{height:0.25rem}.h-10{height:2.5rem}.h-2{height:0.5rem}.h-2\.5{height:0.625rem}.h-3\.5{height:0.875rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-8{height:2rem}.h-9{height:2.25rem}.h-\[430px\]{height:430px}.h-\[62px\]{height:62px}.h-\[66px\]{height:66px}.h-\[82px\]{height:82px}.h-full{height:100%}.h-screen{height:100vh}.w-1\.5{width:0.375rem}.w-10{width:2.5rem}.w-2\.5{width:0.625rem}.w-36{width:9rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-8{width:2rem}.w-9{width:2.25rem}.w-\[195px\]{width:195px}.w-full{width:100%}.w-screen{width:100vw}.max-w-4xl{max-width:56rem}.max-w-\[230px\]{max-width:230px}.max-w-\[540px\]{max-width:540px}.max-w-\[560px\]{max-width:560px}.max-w-\[650px\]{max-width:650px}.max-w-lg{max-width:32rem}.flex-1{flex:1 1 0%}.flex-shrink-0{flex-shrink:0}.border-collapse{border-collapse:collapse}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-not-allowed{cursor:not-allowed}.cursor-pointer{cursor:pointer}.list-disc{list-style-type:disc}.grid-cols-10{grid-template-columns:repeat(10, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.justify-around{justify-content:space-around}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-2\.5{gap:0.625rem}.gap-3{gap:0.75rem}.gap-6{gap:1.5rem}.space-y-0\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.125rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.divide-y > :not([hidden]) ~ :not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px * calc(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px * var(--tw-divide-y-reverse))}.divide-red-200 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(254 202 202 / var(--tw-divide-opacity, 1))}.divide-slate-200 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(226 232 240 / var(--tw-divide-opacity, 1))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.whitespace-pre-line{white-space:pre-line}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-sm{border-radius:0.125rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-4{border-width:4px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-l{border-left-width:1px}.border-r{border-right-width:1px}.border-t{border-top-width:1px}.border-t-4{border-top-width:4px}.border-\[\#0055a5\]{--tw-border-opacity:1;border-color:rgb(0 85 165 / var(--tw-border-opacity, 1))}.border-\[\#00a3c4\]{--tw-border-opacity:1;border-color:rgb(0 163 196 / var(--tw-border-opacity, 1))}.border-\[\#0b56a8\]{--tw-border-opacity:1;border-color:rgb(11 86 168 / var(--tw-border-opacity, 1))}.border-\[\#1a365d\]{--tw-border-opacity:1;border-color:rgb(26 54 93 / var(--tw-border-opacity, 1))}.border-\[\#2b6cb0\]{--tw-border-opacity:1;border-color:rgb(43 108 176 / var(--tw-border-opacity, 1))}.border-\[\#2e7d32\]{--tw-border-opacity:1;border-color:rgb(46 125 50 / var(--tw-border-opacity, 1))}.border-\[\#4a5568\]{--tw-border-opacity:1;border-color:rgb(74 85 104 / var(--tw-border-opacity, 1))}.border-\[\#6b8e23\]{--tw-border-opacity:1;border-color:rgb(107 142 35 / var(--tw-border-opacity, 1))}.border-\[\#c53030\]{--tw-border-opacity:1;border-color:rgb(197 48 48 / var(--tw-border-opacity, 1))}.border-\[\#d32f2f\]{--tw-border-opacity:1;border-color:rgb(211 47 47 / var(--tw-border-opacity, 1))}.border-\[\#d69e2e\]{--tw-border-opacity:1;border-color:rgb(214 158 46 / var(--tw-border-opacity, 1))}.border-\[\#dd6b20\]{--tw-border-opacity:1;border-color:rgb(221 107 32 / var(--tw-border-opacity, 1))}.border-\[\#e53e3e\]{--tw-border-opacity:1;border-color:rgb(229 62 62 / var(--tw-border-opacity, 1))}.border-amber-400\/40{border-color:rgb(251 191 36 / 0.4)}.border-purple-300{--tw-border-opacity:1;border-color:rgb(216 180 254 / var(--tw-border-opacity, 1))}.border-red-200{--tw-border-opacity:1;border-color:rgb(254 202 202 / var(--tw-border-opacity, 1))}.border-red-700{--tw-border-opacity:1;border-color:rgb(185 28 28 / var(--tw-border-opacity, 1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-300{--tw-border-opacity:1;border-color:rgb(203 213 225 / var(--tw-border-opacity, 1))}.border-slate-400{--tw-border-opacity:1;border-color:rgb(148 163 184 / var(--tw-border-opacity, 1))}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.bg-\[\#0055a5\]{--tw-bg-opacity:1;background-color:rgb(0 85 165 / var(--tw-bg-opacity, 1))}.bg-\[\#0b56a8\]{--tw-bg-opacity:1;background-color:rgb(11 86 168 / var(--tw-bg-opacity, 1))}.bg-\[\#4ce639\]{--tw-bg-opacity:1;background-color:rgb(76 230 57 / var(--tw-bg-opacity, 1))}.bg-\[\#9fa8da\]{--tw-bg-opacity:1;background-color:rgb(159 168 218 / var(--tw-bg-opacity, 1))}.bg-\[\#a5e8ba\]{--tw-bg-opacity:1;background-color:rgb(165 232 186 / var(--tw-bg-opacity, 1))}.bg-\[\#aed581\]{--tw-bg-opacity:1;background-color:rgb(174 213 129 / var(--tw-bg-opacity, 1))}.bg-\[\#d32f2f\]{--tw-bg-opacity:1;background-color:rgb(211 47 47 / var(--tw-bg-opacity, 1))}.bg-\[\#dce775\]{--tw-bg-opacity:1;background-color:rgb(220 231 117 / var(--tw-bg-opacity, 1))}.bg-\[\#f8bbd0\]{--tw-bg-opacity:1;background-color:rgb(248 187 208 / var(--tw-bg-opacity, 1))}.bg-\[\#ff8a96\]{--tw-bg-opacity:1;background-color:rgb(255 138 150 / var(--tw-bg-opacity, 1))}.bg-\[\#ffa726\]{--tw-bg-opacity:1;background-color:rgb(255 167 38 / var(--tw-bg-opacity, 1))}.bg-amber-200{--tw-bg-opacity:1;background-color:rgb(253 230 138 / var(--tw-bg-opacity, 1))}.bg-amber-400{--tw-bg-opacity:1;background-color:rgb(251 191 36 / var(--tw-bg-opacity, 1))}.bg-amber-500\/20{background-color:rgb(245 158 11 / 0.2)}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-blue-50\/60{background-color:rgb(239 246 255 / 0.6)}.bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-cyan-50\/40{background-color:rgb(236 254 255 / 0.4)}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-orange-500{--tw-bg-opacity:1;background-color:rgb(249 115 22 / var(--tw-bg-opacity, 1))}.bg-pink-600{--tw-bg-opacity:1;background-color:rgb(219 39 119 / var(--tw-bg-opacity, 1))}.bg-red-100\/80{background-color:rgb(254 226 226 / 0.8)}.bg-red-50{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity, 1))}.bg-red-600{--tw-bg-opacity:1;background-color:rgb(220 38 38 / var(--tw-bg-opacity, 1))}.bg-red-700{--tw-bg-opacity:1;background-color:rgb(185 28 28 / var(--tw-bg-opacity, 1))}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.bg-slate-200{--tw-bg-opacity:1;background-color:rgb(226 232 240 / var(--tw-bg-opacity, 1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-slate-50\/70{background-color:rgb(248 250 252 / 0.7)}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-900\/50{background-color:rgb(15 23 42 / 0.5)}.bg-transparent{background-color:transparent}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/90{background-color:rgb(255 255 255 / 0.9)}.bg-gradient-to-b{background-image:linear-gradient(to bottom, var(--tw-gradient-stops))}.bg-gradient-to-br{background-image:linear-gradient(to bottom right, var(--tw-gradient-stops))}.from-\[\#2e4033\]{--tw-gradient-from:#2e4033 var(--tw-gradient-from-position);--tw-gradient-to:rgb(46 64 51 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-\[\#558b2f\]{--tw-gradient-from:#558b2f var(--tw-gradient-from-position);--tw-gradient-to:rgb(85 139 47 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-\[\#6b21a8\]{--tw-gradient-from:#6b21a8 var(--tw-gradient-from-position);--tw-gradient-to:rgb(107 33 168 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-\[\#4c1d95\]{--tw-gradient-to:rgb(76 29 149 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #4c1d95 var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-\[\#1b261e\]{--tw-gradient-to:#1b261e var(--tw-gradient-to-position)}.to-\[\#1e1b4b\]{--tw-gradient-to:#1e1b4b var(--tw-gradient-to-position)}.to-\[\#33691e\]{--tw-gradient-to:#33691e var(--tw-gradient-to-position)}.p-1{padding:0.25rem}.p-1\.5{padding:0.375rem}.p-2{padding:0.5rem}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-1\.5{padding-left:0.375rem;padding-right:0.375rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.pb-1{padding-bottom:0.25rem}.pb-1\.5{padding-bottom:0.375rem}.pb-2{padding-bottom:0.5rem}.pb-3{padding-bottom:0.75rem}.pl-5{padding-left:1.25rem}.pr-3{padding-right:0.75rem}.pr-4{padding-right:1rem}.pt-1{padding-top:0.25rem}.pt-1\.5{padding-top:0.375rem}.pt-2{padding-top:0.5rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.font-serif{font-family:ui-serif, Georgia, Cambria, "Times New Roman", Times, serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-6xl{font-size:3.75rem;line-height:1}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[7px\]{font-size:7px}.text-\[8\.5px\]{font-size:8.5px}.text-\[8px\]{font-size:8px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-none{line-height:1}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-0.025em}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-\[\#0055a5\]{--tw-text-opacity:1;color:rgb(0 85 165 / var(--tw-text-opacity, 1))}.text-\[\#00a3c4\]{--tw-text-opacity:1;color:rgb(0 163 196 / var(--tw-text-opacity, 1))}.text-\[\#0987a0\]{--tw-text-opacity:1;color:rgb(9 135 160 / var(--tw-text-opacity, 1))}.text-\[\#0a4222\]{--tw-text-opacity:1;color:rgb(10 66 34 / var(--tw-text-opacity, 1))}.text-\[\#0b3d02\]{--tw-text-opacity:1;color:rgb(11 61 2 / var(--tw-text-opacity, 1))}.text-\[\#0b56a8\]{--tw-text-opacity:1;color:rgb(11 86 168 / var(--tw-text-opacity, 1))}.text-\[\#1a237e\]{--tw-text-opacity:1;color:rgb(26 35 126 / var(--tw-text-opacity, 1))}.text-\[\#1a365d\]{--tw-text-opacity:1;color:rgb(26 54 93 / var(--tw-text-opacity, 1))}.text-\[\#1b3b09\]{--tw-text-opacity:1;color:rgb(27 59 9 / var(--tw-text-opacity, 1))}.text-\[\#1b5e20\]{--tw-text-opacity:1;color:rgb(27 94 32 / var(--tw-text-opacity, 1))}.text-\[\#1e4e8c\]{--tw-text-opacity:1;color:rgb(30 78 140 / var(--tw-text-opacity, 1))}.text-\[\#2b6cb0\]{--tw-text-opacity:1;color:rgb(43 108 176 / var(--tw-text-opacity, 1))}.text-\[\#2e7d32\]{--tw-text-opacity:1;color:rgb(46 125 50 / var(--tw-text-opacity, 1))}.text-\[\#333b05\]{--tw-text-opacity:1;color:rgb(51 59 5 / var(--tw-text-opacity, 1))}.text-\[\#33691e\]{--tw-text-opacity:1;color:rgb(51 105 30 / var(--tw-text-opacity, 1))}.text-\[\#3e1f00\]{--tw-text-opacity:1;color:rgb(62 31 0 / var(--tw-text-opacity, 1))}.text-\[\#4a0e1c\]{--tw-text-opacity:1;color:rgb(74 14 28 / var(--tw-text-opacity, 1))}.text-\[\#4a6b13\]{--tw-text-opacity:1;color:rgb(74 107 19 / var(--tw-text-opacity, 1))}.text-\[\#557a19\]{--tw-text-opacity:1;color:rgb(85 122 25 / var(--tw-text-opacity, 1))}.text-\[\#610b15\]{--tw-text-opacity:1;color:rgb(97 11 21 / var(--tw-text-opacity, 1))}.text-\[\#9b2c2c\]{--tw-text-opacity:1;color:rgb(155 44 44 / var(--tw-text-opacity, 1))}.text-\[\#b7791f\]{--tw-text-opacity:1;color:rgb(183 121 31 / var(--tw-text-opacity, 1))}.text-\[\#c05621\]{--tw-text-opacity:1;color:rgb(192 86 33 / var(--tw-text-opacity, 1))}.text-\[\#c53030\]{--tw-text-opacity:1;color:rgb(197 48 48 / var(--tw-text-opacity, 1))}.text-\[\#d69e2e\]{--tw-text-opacity:1;color:rgb(214 158 46 / var(--tw-text-opacity, 1))}.text-\[\#dd6b20\]{--tw-text-opacity:1;color:rgb(221 107 32 / var(--tw-text-opacity, 1))}.text-\[\#e53e3e\]{--tw-text-opacity:1;color:rgb(229 62 62 / var(--tw-text-opacity, 1))}.text-amber-200{--tw-text-opacity:1;color:rgb(253 230 138 / var(--tw-text-opacity, 1))}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.text-amber-600{--tw-text-opacity:1;color:rgb(217 119 6 / var(--tw-text-opacity, 1))}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175 / var(--tw-text-opacity, 1))}.text-blue-900{--tw-text-opacity:1;color:rgb(30 58 138 / var(--tw-text-opacity, 1))}.text-cyan-700{--tw-text-opacity:1;color:rgb(14 116 144 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-lime-100{--tw-text-opacity:1;color:rgb(236 252 203 / var(--tw-text-opacity, 1))}.text-lime-200{--tw-text-opacity:1;color:rgb(217 249 157 / var(--tw-text-opacity, 1))}.text-lime-400{--tw-text-opacity:1;color:rgb(163 230 53 / var(--tw-text-opacity, 1))}.text-orange-700{--tw-text-opacity:1;color:rgb(194 65 12 / var(--tw-text-opacity, 1))}.text-purple-200{--tw-text-opacity:1;color:rgb(233 213 255 / var(--tw-text-opacity, 1))}.text-purple-600{--tw-text-opacity:1;color:rgb(147 51 234 / var(--tw-text-opacity, 1))}.text-purple-700{--tw-text-opacity:1;color:rgb(126 34 206 / var(--tw-text-opacity, 1))}.text-red-100{--tw-text-opacity:1;color:rgb(254 226 226 / var(--tw-text-opacity, 1))}.text-red-600{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.text-red-700{--tw-text-opacity:1;color:rgb(185 28 28 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.opacity-60{opacity:0.6}.opacity-85{opacity:0.85}.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.ease-out{transition-timing-function:cubic-bezier(0, 0, 0.2, 1)}.hover\:bg-blue-700:hover{--tw-bg-opacity:1;background-color:rgb(29 78 216 / var(--tw-bg-opacity, 1))}.hover\:bg-red-50:hover{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-200:hover{--tw-bg-opacity:1;background-color:rgb(226 232 240 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-50:hover{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.active\:scale-90:active{--tw-scale-x:.9;--tw-scale-y:.9;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@media (min-width: 640px){.sm\:w-\[215px\]{width:215px}}@media (min-width: 1024px){.lg\:h-\[68px\]{height:68px}.lg\:h-\[74px\]{height:74px}.lg\:h-\[94px\]{height:94px}.lg\:w-\[235px\]{width:235px}.lg\:max-w-\[600px\]{max-width:600px}.lg\:gap-3{gap:0.75rem}.lg\:p-3{padding:0.75rem}.lg\:p-5{padding:1.25rem}.lg\:px-8{padding-left:2rem;padding-right:2rem}.lg\:text-2xl{font-size:1.5rem;line-height:2rem}.lg\:text-4xl{font-size:2.25rem;line-height:2.5rem}.lg\:text-\[10px\]{font-size:10px}.lg\:text-\[11px\]{font-size:11px}.lg\:text-\[8px\]{font-size:8px}.lg\:text-\[9\.5px\]{font-size:9.5px}.lg\:text-\[9px\]{font-size:9px}.lg\:text-sm{font-size:0.875rem;line-height:1.25rem}}</style>
 </head>
 <body class="relative flex w-screen h-screen text-slate-800">
 
@@ -151,22 +151,12 @@
 
             <!-- COLUMNA 1: La Quiniela (con submenú flotante) | COLUMNA 2: El Gordo -->
             <div class="relative">
-                <button onclick="toggleQuinielaMenu()" id="btn-quiniela" class="selae-btn border-[#c53030] w-full h-[66px] lg:h-[74px] flex flex-col items-center justify-center p-1">
+                <button onclick="selectMenu('quiniela_resultados')" id="btn-quiniela" class="selae-btn border-[#c53030] w-full h-[66px] lg:h-[74px] flex flex-col items-center justify-center p-1">
                     <div class="w-6 h-6 mb-1 text-[#c53030]">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z" fill="currentColor"/></svg>
                     </div>
                     <span class="text-[9px] lg:text-[10px] font-extrabold text-[#9b2c2c] leading-tight text-center">LA QUINIELA</span>
                 </button>
-
-                <!-- Submenú flotante exacto de la captura ("Resultados" y "Jornada Actual") -->
-                <div id="quiniela-submenu" class="hidden absolute left-[108%] top-0 z-50 flex flex-col gap-2.5 bg-white/90 backdrop-blur-md p-2.5 rounded-2xl shadow-xl border border-red-200 w-36">
-                    <button onclick="selectMenu('quiniela_resultados')" class="py-2 px-3 rounded-full border-2 border-[#c53030] bg-white hover:bg-red-50 text-[#9b2c2c] font-bold text-xs shadow-sm active:scale-95 transition">
-                        Resultados
-                    </button>
-                    <button onclick="selectMenu('quiniela_jornada')" class="py-2 px-3 rounded-full border-2 border-[#c53030] bg-white hover:bg-red-50 text-[#9b2c2c] font-bold text-xs shadow-sm active:scale-95 transition">
-                        Jornada Actual
-                    </button>
-                </div>
             </div>
 
             <button onclick="selectMenu('el_gordo')" id="btn-el_gordo" class="selae-btn border-[#e53e3e] h-[66px] lg:h-[74px] flex flex-col items-center justify-center p-1 mt-2">
@@ -184,7 +174,7 @@
                 <span class="text-[9px] lg:text-[10px] font-extrabold text-[#0987a0] leading-tight text-center">QUINIGOL</span>
             </button>
 
-            <button onclick="selectMenu('eurodreams')" id="btn-eurodreams" class="selae-btn border-[#4a5568] h-[66px] lg:h-[74px] flex flex-col items-center justify-center p-1 mt-2">
+            <button onclick="selectMenu('eurodreams')" id="btn-eurodreams" style="border-color:#6d28a8" class="selae-btn h-[66px] lg:h-[74px] flex flex-col items-center justify-center p-1 mt-2">
                 <div class="font-black tracking-tight text-slate-700 leading-none text-center" style="font-size:clamp(11px,1.5vh,17px)">
                     EURO<span class="text-purple-600">✦</span><br>DREAMS
                 </div>
@@ -715,8 +705,23 @@
         function computeExtraDays(names) {
             const now = new Date();
             Object.keys(REPO_GAMES).forEach(gk => {
-                const g = REPO_GAMES[gk]; if (g.by !== 'dia') return;
-                const set = new Set();
+                const g = REPO_GAMES[gk];
+                if (g.by !== 'dia') {
+                    // por jornada: cada archivo S<semana>_<Tag>_Jornada<n>.pdf; su fecha real se lee del PDF
+                    const sl = [];
+                    names.forEach(n => {
+                        const m = n.match(new RegExp(`^S(\\d+)_${g.tag}_Jornada(\\d+)\\.pdf$`)); if (!m) return;
+                        for (const yr of [now.getFullYear(), now.getFullYear() - 1]) {
+                            const jan4 = new Date(yr, 0, 4), mon1 = new Date(yr, 0, 4 - ((jan4.getDay() + 6) % 7));
+                            const mon = new Date(mon1.getFullYear(), mon1.getMonth(), mon1.getDate() + (+m[1] - 1) * 7);
+                            if (mon <= new Date(now.getTime() + 3 * 86400000)) {
+                                sl.push({ name: n, base: n.replace(/\.pdf$/, ''), np: false, wk: +m[1], mon, ymd: ymdOf(mon) }); break;
+                            }
+                        }
+                    });
+                    EXTRA_DAYS[gk] = new Set(); SLOTS[gk] = sl; return;
+                }
+                const set = new Set(), slots = [];
                 names.forEach(n => {
                     const m = n.match(new RegExp(`^S(\\d+)_${g.tag}_([^_]+?)(?:_NotaPrensa)?\\.pdf$`)); if (!m) return;
                     const dow = DIAS_ES.indexOf(m[2]); if (dow < 0) return;
@@ -724,23 +729,94 @@
                         const jan4 = new Date(yr, 0, 4), mon1 = new Date(yr, 0, 4 - ((jan4.getDay() + 6) % 7));
                         const d = new Date(mon1.getFullYear(), mon1.getMonth(), mon1.getDate() + (+m[1] - 1) * 7 + ((dow + 6) % 7));
                         if (d <= new Date(now.getTime() + 3 * 86400000)) {
-                            set.add(`${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`); break;
+                            const ymd = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+                            set.add(ymd); slots.push({ name: n, base: n.replace(/(?:_NotaPrensa)?\.pdf$/, ''), np: /_NotaPrensa\.pdf$/.test(n), ymd }); break;
                         }
                     }
                 });
-                EXTRA_DAYS[gk] = set;
+                EXTRA_DAYS[gk] = set; SLOTS[gk] = slots;
             });
+            applyRealDates(); computeAvail();
+            loadFechas();
+        }
+
+        // FECHA REAL de cada PDF (Lotería Nacional): a veces un sorteo se traslada (p. ej. el del sábado 10/10 se celebró el lunes 12/10)
+        // y la repo lo guarda en el hueco "Sábado". La fecha real se lee del propio PDF ("SORTEO DEL DÍA 12 DE OCTUBRE DE 2026") y se recuerda.
+        const FECHA_EN_PDF = ['loteria_nacional', 'quiniela_resultados', 'lototurf', 'quinigol', 'quintuple'];
+        const ymdOf = d => `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+        const SLOTS = {}, FILE_BY_DATE = {}, SKIP_DAYS = {};
+        const REAL_FECHAS = {};   // archivo (sin .pdf) -> fecha real aaaammdd, de descargas/fechas.json
+        // Días con resultado: solo los sorteos que tienen archivo en la repo salen en el calendario
+        const AVAIL = {};
+        const FIJOS = ['primitiva', 'bonoloto', 'el_gordo', 'euromillones', 'eurodreams'];   // días fijos: el sorteo de ayer sale aunque su archivo aún no esté
+        function computeAvail() {
+            let changed = false;
+            Object.keys(REPO_GAMES).forEach(gk => {
+                const slots = SLOTS[gk]; let set;
+                if (slots && slots.length) {
+                    if (REPO_GAMES[gk].by === 'dia') set = new Set(slots.map(sl => (FECHA_EN_PDF.includes(gk) && REAL_FECHAS[sl.name.replace(/\.pdf$/, '')]) || sl.ymd));
+                    else if (slots.every(sl => REAL_FECHAS[sl.name.replace(/\.pdf$/, '')])) set = new Set(slots.map(sl => REAL_FECHAS[sl.name.replace(/\.pdf$/, '')]));
+                }
+                const a = JSON.stringify(set ? [...set].sort() : null), b = JSON.stringify(AVAIL[gk] ? [...AVAIL[gk]].sort() : null);
+                if (a !== b) changed = true;
+                if (set) AVAIL[gk] = set; else delete AVAIL[gk];
+            });
+            return changed;
+        }
+        function applyRealDates() {
+            let changed = false;
+            FECHA_EN_PDF.forEach(gk => {
+                const slots = SLOTS[gk]; if (!slots) return;
+                const real = new Set(), skip = new Set(), byDate = {}, extra = new Set(EXTRA_DAYS[gk] || []);
+                if (REPO_GAMES[gk].by !== 'dia') {
+                    const byWeek = {}, mons = {};
+                    slots.forEach(sl => { const r = REAL_FECHAS[sl.name.replace(/\.pdf$/, '')]; if (!r) return; (byWeek[sl.wk] = byWeek[sl.wk] || []).push(r); mons[sl.wk] = sl.mon; byDate[r] = sl.base + '.pdf'; real.add(r); extra.add(r); });
+                    const hace4 = new Date(); hace4.setDate(hace4.getDate() - 4); const h4 = ymdOf(hace4);
+                    Object.keys(byWeek).forEach(wk => {
+                        const max = byWeek[wk].slice().sort().pop();
+                        for (let i = 0; i < 7; i++) {
+                            const x = new Date(mons[wk]); x.setDate(x.getDate() + i);
+                            const y = ymdOf(x);
+                            if (OFFICIAL[gk].days.includes(x.getDay()) && !real.has(y) && (y < max || y < h4)) skip.add(y);
+                        }
+                    });
+                    const ser2 = (sk, bd, ex) => JSON.stringify([[...sk].sort(), bd, [...ex].sort()]);
+                    if (ser2(skip, byDate, extra) !== ser2(SKIP_DAYS[gk] || [], FILE_BY_DATE[gk] || {}, EXTRA_DAYS[gk] || [])) changed = true;
+                    SKIP_DAYS[gk] = skip; FILE_BY_DATE[gk] = byDate; EXTRA_DAYS[gk] = extra;
+                    return;
+                }
+                // un archivo principal manda sobre su copia _NotaPrensa
+                slots.slice().sort((a, b) => a.np - b.np).forEach(sl => {
+                    const r = REAL_FECHAS[sl.name.replace(/\.pdf$/, '')]; if (!r) return;
+                    if (r !== sl.ymd) { skip.add(sl.ymd); extra.add(r); }
+                    if (!byDate[r]) byDate[r] = sl.base + '.pdf';
+                    real.add(r);
+                });
+                real.forEach(r => skip.delete(r));
+                skip.forEach(y => extra.delete(y));
+                const ser = (sk, bd, ex) => JSON.stringify([[...sk].sort(), bd, [...ex].sort()]);
+                if (ser(skip, byDate, extra) !== ser(SKIP_DAYS[gk] || [], FILE_BY_DATE[gk] || {}, EXTRA_DAYS[gk] || [])) changed = true;
+                SKIP_DAYS[gk] = skip; FILE_BY_DATE[gk] = byDate; EXTRA_DAYS[gk] = extra;
+            });
+            return changed;
+        }
+        function loadFechas() {
+            return fetch(repoUrl('fechas.json')).then(r => r.ok ? r.json() : {}).catch(() => ({}))
+                .then(j => { Object.assign(REAL_FECHAS, j); const c1 = applyRealDates(), c2 = computeAvail(); if ((c1 || c2) && REPO_GAMES[state.activeView]) render(); });
         }
         const MESES_ATRAS = 3;  // la búsqueda de sorteos (calendario y deslizar) llega como máximo 3 meses atrás
         function getDraws(gameKey, n = 1000) {
             const o = OFFICIAL[gameKey];
             const out = [];
             const d = new Date();
-            d.setDate(d.getDate() - RESULTS_LAG_DAYS);  // los sorteos son de noche: el último disponible es el del día anterior
+            const ay = new Date(); ay.setDate(ay.getDate() - 1);
+            const ayerYmd = `${ay.getFullYear()}${String(ay.getMonth() + 1).padStart(2, '0')}${String(ay.getDate()).padStart(2, '0')}`;
+            const av = AVAIL[gameKey];   // días que tienen archivo en la repo (si ya se conoce el listado)
+            if (!av) d.setDate(d.getDate() - RESULTS_LAG_DAYS);  // sin listado: los sorteos son de noche, el último disponible es el del día anterior
             const limite = new Date(); limite.setHours(0, 0, 0, 0); limite.setMonth(limite.getMonth() - MESES_ATRAS);
             for (let i = 0; i < 400 && out.length < n && d >= limite; i++) {
                 const ymdD = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
-                if (o.days.includes(d.getDay()) || (EXTRA_DAYS[gameKey] && EXTRA_DAYS[gameKey].has(ymdD))) {
+                if (av ? (av.has(ymdD) || (FIJOS.includes(gameKey) && ymdD === ayerYmd && o.days.includes(d.getDay()))) : ((o.days.includes(d.getDay()) && !(SKIP_DAYS[gameKey] && SKIP_DAYS[gameKey].has(ymdD))) || (EXTRA_DAYS[gameKey] && EXTRA_DAYS[gameKey].has(ymdD)))) {
                     const dd = String(d.getDate()).padStart(2, '0');
                     const mm = String(d.getMonth() + 1).padStart(2, '0');
                     const yy = d.getFullYear();
@@ -774,7 +850,7 @@
         // Por defecto lee de la repo pública cebrich/descargas. Para probar otra carpeta: ?base=https://.../  (o ?base=off para desactivar)
         const _qBase = new URLSearchParams(location.search).get('base');
         const CONTENT_BASE = _qBase === 'off' ? '' : (_qBase ? _qBase.replace(/([^/])$/, '$1/') : 'https://raw.githubusercontent.com/cebrich/descargas/main/descargas/');
-        const REFRESH_MIN = 30;  // vuelve a descargar los PDFs cada 30 minutos
+        const REFRESH_MIN = 180;  // vuelve a descargar los PDFs cada 3 horas
         const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs';
         const PDFJS_WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs';
         // Para navegadores antiguos (Chrome/Opera < 119, p. ej. Android 5): PDF.js 3.11 "legacy" (script clásico, sin sintaxis moderna)
@@ -813,37 +889,68 @@
         }
         const repoUrl = name => CONTENT_BASE + encodeURIComponent(name) + '?t=' + Math.floor(Date.now() / 300000);
 
-        // Quita los márgenes blancos de una hoja renderizada (el "recorte")
+        // Ancho de render de cada hoja: algo menor en equipos antiguos (Android <= 5 o pocos núcleos)
+        const PDF_W = +new URLSearchParams(location.search).get('pdfw') || ((/Android [1-5]\b/.test(navigator.userAgent) || (navigator.hardwareConcurrency || 4) <= 4) ? 1050 : 1250);
+
+        // Quita los márgenes blancos de una hoja renderizada (se mide en una copia reducida: mucho más rápido)
         function trimCanvas(cv) {
-            const ctx = cv.getContext('2d'), w = cv.width, h = cv.height;
-            const d = ctx.getImageData(0, 0, w, h).data;
-            const isInk = (x, y) => { const i = (y * w + x) * 4; return d[i] < 240 || d[i + 1] < 240 || d[i + 2] < 240; };
-            let t = 0, b = h - 1, l = 0, r = w - 1;
-            outer1: for (; t < h; t++) for (let x = 0; x < w; x += 2) if (isInk(x, t)) break outer1;
-            outer2: for (; b > t; b--) for (let x = 0; x < w; x += 2) if (isInk(x, b)) break outer2;
-            outer3: for (; l < w; l++) for (let y = t; y <= b; y += 2) if (isInk(l, y)) break outer3;
-            outer4: for (; r > l; r--) for (let y = t; y <= b; y += 2) if (isInk(r, y)) break outer4;
-            const pad = 6; l = Math.max(0, l - pad); t = Math.max(0, t - pad); r = Math.min(w - 1, r + pad); b = Math.min(h - 1, b + pad);
-            const out = document.createElement('canvas'); out.width = r - l + 1; out.height = b - t + 1;
-            out.getContext('2d').drawImage(cv, l, t, out.width, out.height, 0, 0, out.width, out.height);
+            const w = cv.width, h = cv.height, k = 4, sw = Math.max(1, Math.round(w / k)), sh = Math.max(1, Math.round(h / k));
+            const sm = document.createElement('canvas'); sm.width = sw; sm.height = sh;
+            const sctx = sm.getContext('2d'); sctx.fillStyle = '#fff'; sctx.fillRect(0, 0, sw, sh); sctx.drawImage(cv, 0, 0, sw, sh);
+            const d = sctx.getImageData(0, 0, sw, sh).data;
+            const isInk = (x, y) => { const i = (y * sw + x) * 4; return d[i] < 250 || d[i + 1] < 250 || d[i + 2] < 250; };
+            let t = 0, b = sh - 1, l = 0, r = sw - 1;
+            outer1: for (; t < sh; t++) for (let x = 0; x < sw; x++) if (isInk(x, t)) break outer1;
+            outer2: for (; b > t; b--) for (let x = 0; x < sw; x++) if (isInk(x, b)) break outer2;
+            outer3: for (; l < sw; l++) for (let y = t; y <= b; y++) if (isInk(l, y)) break outer3;
+            outer4: for (; r > l; r--) for (let y = t; y <= b; y++) if (isInk(r, y)) break outer4;
+            const pad = 10;
+            let x0 = Math.max(0, l * k - pad), y0 = Math.max(0, t * k - pad), x1 = Math.min(w, (r + 1) * k + pad), y1 = Math.min(h, (b + 1) * k + pad);
+            const out = document.createElement('canvas'); out.width = Math.max(1, x1 - x0); out.height = Math.max(1, y1 - y0);
+            out.getContext('2d').drawImage(cv, x0, y0, out.width, out.height, 0, 0, out.width, out.height);
             return out;
         }
+        // JPEG asíncrono (no bloquea la pantalla) -> URL de objeto; si el navegador no puede, data URL
+        function canvasToUrl(cv) {
+            return new Promise(res => {
+                if (!cv.toBlob || !window.URL || !URL.createObjectURL) return res(cv.toDataURL('image/jpeg', 0.82));
+                try { cv.toBlob(bl => res(bl ? URL.createObjectURL(bl) : cv.toDataURL('image/jpeg', 0.82)), 'image/jpeg', 0.82); }
+                catch (e) { res(cv.toDataURL('image/jpeg', 0.82)); }
+            });
+        }
+        // Firma rápida del contenido del PDF: si no ha cambiado desde la última descarga, no se vuelve a renderizar
+        function pdfSig(buf) {
+            const u = new Uint8Array(buf), step = Math.max(1, (u.length / 8192) | 0); let h = u.length;
+            for (let i = 0; i < u.length; i += step) h = (h * 31 + u[i]) | 0;
+            return u.length + ':' + h;
+        }
+        const PDF_DONE = {};
 
-        // Descarga un PDF y devuelve sus hojas como imágenes recortadas (lanza error si no existe)
-        async function loadPdfPages(url) {
-            pdfjsLib = await getPdfjs();
-            const pdf = await pdfjsLib.getDocument({ url }).promise;
+        // Descarga un PDF y devuelve sus hojas como imágenes recortadas (lanza error si no existe).
+        // onFirst(pages) se llama en cuanto está lista la primera hoja (el array se va completando).
+        async function loadPdfPages(url, onFirst) {
+            const [lib, buf] = await Promise.all([
+                getPdfjs(),
+                fetch(url).then(r => { if (!r.ok) throw new Error('PDF ' + r.status); return r.arrayBuffer(); })
+            ]);
+            pdfjsLib = lib;
+            const key = url.split('?')[0], sig = pdfSig(buf);
+            if (PDF_DONE[key] && PDF_DONE[key].sig === sig) return PDF_DONE[key].pages;
+            const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(buf) }).promise;
             const pages = [];
             for (let n = 1; n <= pdf.numPages; n++) {
                 const page = await pdf.getPage(n);
                 const vp1 = page.getViewport({ scale: 1 });
-                const vp = page.getViewport({ scale: 1250 / vp1.width });
+                const vp = page.getViewport({ scale: PDF_W / vp1.width });
                 const cv = document.createElement('canvas'); cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
                 const ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height);
                 await page.render({ canvasContext: ctx, viewport: vp }).promise;
-                pages.push(trimCanvas(cv).toDataURL('image/jpeg', 0.82));
+                pages.push(await canvasToUrl(trimCanvas(cv)));
+                cv.width = cv.height = 1;   // libera memoria
+                if (n === 1 && onFirst) { try { onFirst(pages); } catch (e) { /* no pasa nada */ } }
             }
             if (!pages.length) throw new Error('PDF sin páginas');
+            PDF_DONE[key] = { sig, pages };
             return pages;
         }
 
@@ -895,7 +1002,8 @@
         // Nombre del PDF de un sorteo (o null si todavía no está publicado)
         async function repoFileFor(gameKey, draw) {
             const g = REPO_GAMES[gameKey], dt = ymdToDate(draw.ymd), wk = isoWeekOf(dt);
-            if (g.by === 'dia') return `S${wk}_${g.tag}_${DIAS_ES[dt.getDay()]}.pdf`;
+            if (g.by === 'dia') return (FILE_BY_DATE[gameKey] && FILE_BY_DATE[gameKey][draw.ymd]) || `S${wk}_${g.tag}_${DIAS_ES[dt.getDay()]}.pdf`;
+            if (FILE_BY_DATE[gameKey] && FILE_BY_DATE[gameKey][draw.ymd]) return FILE_BY_DATE[gameKey][draw.ymd];
             // por jornada: los archivos de esa semana, ordenados por jornada, corresponden a los sorteos de la semana en orden
             const files = (await ensureListing())
                 .map(n => n.match(new RegExp(`^S${wk}_${g.tag}_Jornada(\\d+)\\.pdf$`)))
@@ -909,10 +1017,10 @@
         function loadRepoDraw(gameKey, draw) {
             const k = gameKey + '|' + draw.ymd; REPO_CACHE[k] = { loading: true };
             repoFileFor(gameKey, draw)
-                .then(f => { if (!f) throw new Error('sin archivo'); return loadPdfPages(repoUrl(f)).catch(e => {
+                .then(f => { if (!f) throw new Error('sin archivo'); const first = pp => { REPO_CACHE[k] = { labels: null, pages: pp }; if (state.activeView === gameKey) render(); }; return loadPdfPages(repoUrl(f), first).catch(e => {
                     // principal (eSTILA) y, si no existe, la copia secundaria S<sem>_<Juego>_<Día>_NotaPrensa.pdf
                     if (REPO_GAMES[gameKey].by !== 'dia') throw e;
-                    return loadPdfPages(repoUrl(f.replace(/\.pdf$/, '_NotaPrensa.pdf')));
+                    return loadPdfPages(repoUrl(f.replace(/\.pdf$/, '_NotaPrensa.pdf')), first);
                 }); })
                 .catch(async err => {   // fuente secundaria: nota de prensa en loteriasyapuestas.es
                     // loteriasyapuestas.es no permite leer sus PDF desde otra web en muchos navegadores; si esta lectura directa falla, la fuente secundaria es la repo (ver descargar_pdfs.py)
@@ -920,7 +1028,7 @@
                     throw err;
                 })
                 .then(pages => { REPO_CACHE[k] = { labels: null, pages }; })
-                .catch(() => { REPO_CACHE[k] = { failed: true }; })
+                .catch(() => { if (!(REPO_CACHE[k] && REPO_CACHE[k].pages)) REPO_CACHE[k] = { failed: true }; })
                 .finally(() => { if (state.activeView === gameKey) render(); });
         }
 
@@ -947,22 +1055,23 @@
 
         function refreshRemotePdfs() {
             if (!CONTENT_BASE) return;
+            loadQuinielaProxima();
             REPO_LIST_P = null;  // vuelve a leer el listado de la repo
             ensureListing().then(names => { computeExtraDays(names); if (OFFICIAL[state.activeView] && REPO_GAMES[state.activeView] && state.sorteoIndex === 0) render(); }).catch(() => {});
             Object.keys(REPO_CACHE).forEach(k => { if (!REPO_CACHE[k].pages) delete REPO_CACHE[k]; });
-            loadClasificaciones().then(n => console.log(`[kiosco] clasificaciones: ${n} hoja(s) desde la repo`)).catch(e => console.warn(`[kiosco] clasificaciones: ${e.message}`));
             loadVisorBotes()
                 .then(n => console.log(`[kiosco] botes: semana S${n} desde la repo`))
-                .catch(e => console.warn(`[kiosco] botes: no se pudo cargar (${e.message}); se mantienen las hojas incrustadas`));
+                .catch(e => console.warn(`[kiosco] botes: no se pudo cargar (${e.message}); se mantienen las hojas incrustadas`))
+                .then(() => setTimeout(() => loadClasificaciones().then(n => console.log(`[kiosco] clasificaciones: ${n} hoja(s) desde la repo`)).catch(e => console.warn(`[kiosco] clasificaciones: ${e.message}`)), 800));
             if (REPO_GAMES[state.activeView]) render();
         }
-        window.addEventListener('load', () => { refreshRemotePdfs(); setInterval(refreshRemotePdfs, REFRESH_MIN * 60 * 1000); });
+        document.addEventListener('DOMContentLoaded', () => { refreshRemotePdfs(); setInterval(refreshRemotePdfs, REFRESH_MIN * 60 * 1000); });
 
         let pagerTimer = null;
         function stopPager() { if (pagerTimer) { clearInterval(pagerTimer); pagerTimer = null; } }
         function startPager() {
             stopPager();
-            if (!state.pagerAuto || OFFICIAL[state.activeView]) return;
+            if (!state.pagerAuto || OFFICIAL[state.activeView] || state.activeView === 'laliga') return;
             const g = LOCAL_PAGES[state.activeView]; if (!g || g.pages.length < 2) return;
             const bar = document.getElementById('pager-bar');
             if (bar) { bar.style.transition = 'none'; bar.style.width = '0%'; void bar.offsetWidth; bar.style.transition = `width ${state.pagerSecs}s linear`; bar.style.width = '100%'; }
@@ -1064,8 +1173,8 @@
         // NAVEGACIÓN Y CONTROLADORES
         // =====================================================================
         function selectMenu(viewId) {
-            document.getElementById('quiniela-submenu').classList.add('hidden');
             state.activeView = viewId;
+            state.ligaTab = null;
             state.sorteoIndex = 0;
             state.docLangSlide = 0;
             state.botesSlide = 0;
@@ -1080,11 +1189,6 @@
             if (activeBtn) activeBtn.classList.add('active');
 
             render();
-        }
-
-        function toggleQuinielaMenu() {
-            const sub = document.getElementById('quiniela-submenu');
-            sub.classList.toggle('hidden');
         }
 
         function changeSorteo(delta) {
@@ -1326,7 +1430,7 @@
                     </div>
 
                     <!-- Resultado oficial incrustado desde loteriasyapuestas.es -->
-                    ${LOCAL_PAGES[gameKey] ? renderPager(gameKey, { vertical: true }) : (bono && bono.loading) ? `<div class="flex-1 w-full flex items-center justify-center text-sm font-bold text-[#0b56a8]">Cargando resultados…</div>` : `<div class="flex-1 w-full flex flex-col items-center justify-center text-center gap-2 text-[#0b56a8]"><div style="font-size:clamp(18px,3vh,30px); font-weight:800;">Resultados todavía no disponibles</div>${PDF_ERR ? `<div style="font-size:11px; color:#94a3b8;">(${PDF_ERR})</div>` : ''}<div style="font-size:clamp(12px,1.8vh,18px); font-weight:600; color:#64748b;">Desliza el dedo para ver otro sorteo o usa "Otras Fechas"</div></div>`}
+                    ${LOCAL_PAGES[gameKey] ? renderPager(gameKey, { vertical: true }) : (bono && bono.loading) ? `<div class="flex-1 w-full flex items-center justify-center text-sm font-bold text-[#0b56a8]">Cargando resultados…</div>` : `<div class="flex-1 w-full flex flex-col items-center justify-center text-center gap-2 text-[#0b56a8]"><div style="font-size:clamp(18px,3vh,30px); font-weight:800;">${FIJOS.includes(gameKey) ? 'Pendiente de descarga' : 'Resultados todavía no disponibles'}</div>${PDF_ERR ? `<div style="font-size:11px; color:#94a3b8;">(${PDF_ERR})</div>` : ''}<div style="font-size:clamp(12px,1.8vh,18px); font-weight:600; color:#64748b;">Desliza el dedo para ver otro sorteo o usa "Otras Fechas"</div></div>`}
 
                 </div>
             `;
@@ -1554,8 +1658,15 @@
         // ---------------------------------------------------------------------
         // 3. VISTA LA QUINIELA - JORNADA ACTUAL (Captura 3)
         // ---------------------------------------------------------------------
+        // Próxima quiniela: la guarda el script de descargas en descargas/quiniela_proxima.json
+        let QUI_PROX = null;
+        function loadQuinielaProxima() {
+            return fetch(repoUrl('quiniela_proxima.json')).then(r => r.ok ? r.json() : null).catch(() => null)
+                .then(j => { if (j && j.partidos && j.partidos.length === 15) { QUI_PROX = j; if (state.ligaTab === 'quiniela') render(); } });
+        }
         function renderQuinielaJornadaView() {
-            const q = LOTTERY_DATA.quinielaJornadaActual;
+            if (!QUI_PROX) return `<div class="w-full h-full flex items-center justify-center view-enter"><div class="bg-white/90 rounded-lg shadow-xl border-2 border-[#d32f2f] px-8 py-6 text-center"><div class="text-lg font-black text-[#d32f2f]">LA QUINIELA</div><div class="text-sm font-bold text-slate-600 mt-1">Pendiente de descarga</div></div></div>`;
+            const q = { jornada: QUI_PROX.jornada ? `Jornada ${QUI_PROX.jornada}ª` : '', subtitulo: QUI_PROX.subtitulo || '', cierre: (QUI_PROX.cierre || '').replace(' ', ' - ') + (QUI_PROX.cierre ? 'h.' : ''), partidos: QUI_PROX.partidos };
             return `
                 <div class="w-full h-full flex flex-col items-center justify-between view-enter">
                     <div class="h-2"></div>
@@ -1594,20 +1705,31 @@
         // 4. VISTA LALIGA - CLASIFICACIONES (Captura 6)
         // ---------------------------------------------------------------------
         // Un botón por clasificación disponible (LaLiga, Liga F…) que salta a sus hojas
+        function ligaSel(i) { if (state.ligaTab) { state.ligaTab = null; state.pagerIdx = i; render(); } else pagerGo(i); }
         function ligaButtons() {
-            const g = LOCAL_PAGES.laliga, groups = [];
-            g.labels.forEach((l, i) => { const name = l.replace(/ \d+$/, ''); const last = groups[groups.length - 1]; if (last && last.name === name) last.to = i; else groups.push({ name, from: i, to: i }); });
-            return groups.map(x => { const on = state.pagerIdx >= x.from && state.pagerIdx <= x.to;
-                return `<button data-grp="1" data-from="${x.from}" data-to="${x.to}" onclick="pagerGo(${x.from})" class="font-bold text-xs lg:text-sm px-6 py-1.5 rounded-full shadow transition active:scale-95 ${on ? 'bg-[#0b56a8] text-white' : 'bg-white text-[#0b56a8] border border-[#0b56a8]'}">${x.name}</button>`; }).join('');
+            const g = LOCAL_PAGES.laliga, q = state.ligaTab === 'quiniela';
+            const cls = on => `font-bold text-xs lg:text-sm px-6 py-1.5 rounded-full shadow transition active:scale-95 ${on ? 'bg-[#0b56a8] text-white' : 'bg-white text-[#0b56a8] border border-[#0b56a8]'}`;
+            const hojas = g ? g.labels.map((l, i) => `<button data-grp="1" data-from="${i}" data-to="${i}" onclick="ligaSel(${i})" class="${cls(!q && state.pagerIdx === i)}">${l}</button>`).join('') : '';
+            return hojas + `<button onclick="state.ligaTab='quiniela'; render();" class="${cls(q)}">Próxima Quiniela</button>`;
         }
         function renderLaLigaView() {
+            if (state.ligaTab === 'quiniela') {
+                return `
+                <div class="w-full h-full flex flex-col items-center view-enter">
+                    <div class="w-full pt-1 text-center flex items-center justify-center gap-3 flex-wrap">${ligaButtons()}</div>
+                    <div class="flex-1 w-full min-h-0">${renderQuinielaJornadaView()}</div>
+                </div>`;
+            }
             if (LOCAL_PAGES.laliga) {
                 return `
                 <div class="w-full h-full flex flex-col items-center justify-between view-enter">
-                    <div class="w-full relative pt-1 text-center flex items-center justify-center gap-3">${ligaButtons()}<div class="absolute right-2 top-1">${pagerControlsIfMulti('laliga')}</div></div>
+                    <div class="w-full pt-1 text-center flex items-center justify-center gap-3 flex-wrap">${ligaButtons()}</div>
                     ${renderPager('laliga')}
                 </div>`;
             }
+            return `<div class="w-full h-full flex flex-col items-center view-enter"><div class="w-full pt-1 text-center flex items-center justify-center gap-3 flex-wrap">${ligaButtons()}</div><div class="flex-1 w-full min-h-0 overflow-auto">${renderLaLigaFallback()}</div></div>`;
+        }
+        function renderLaLigaFallback() {
             const data = LOTTERY_DATA.clasificacionLaLiga;
             const showPrimera = state.ligaFilter === 'todas' || state.ligaFilter === 'primera';
             const showSegunda = state.ligaFilter === 'todas' || state.ligaFilter === 'segunda';
@@ -1918,9 +2040,8 @@
         window.addEventListener('load', () => { syncBtnColors(); setTimeout(syncBtnColors, 400); setTimeout(syncBtnColors, 1500); });
 
         // Inicializar aplicación en la pantalla de Botes
-        window.onload = function() {
-            render();
-        };
+        function bootKiosco() { render(); }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootKiosco); else bootKiosco();
     </script>
 </body>
 </html>
